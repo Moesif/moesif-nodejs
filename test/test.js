@@ -88,7 +88,7 @@ function loggerTestHelper(providedOptions, moesifOptions) {
 
 describe('moesif-express', function () {
   describe('fail cases', function () {
-    it('throw an error when not providing an api secret', function () {
+    it('throw an error when not provided an application id.', function () {
       expect(function () {
         moesifExpress({})
       }).to.throw(Error);
