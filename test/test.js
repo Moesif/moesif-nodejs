@@ -12,24 +12,16 @@ var expect = require('chai').expect;
 var _ = require('lodash');
 var moesifExpress = require('../lib');
 
-var TEST_API_SECRET_KEY = 'eyJhcHAiOiIzNjU6NiIsInZlciI6IjIuMCIsIm9yZyI6IjM1OTo0IiwiaWF0IjoxNDczMzc5MjAwfQ.9WOx3D357PGMxrXzFm3pV3IzJSYNsO4oRudiMI8mQ3Q';
+var TEST_API_SECRET_KEY = 'eyJhcHAiOiIzNDU6MSIsInZlciI6IjIuMCIsIm9yZyI6Ijg4OjIiLCJpYXQiOjE0NzcwMDgwMDB9.576_l8Bza-gOoKzBR4_qnKEQOi2UYHh_FAK9IoDdUgc';
 
 function mockReq(reqMock) {
   var reqSpec = _.extend({
     method: 'GET',
     url: '/hello',
-    host: 'localhost:3000',
+    hostname: 'localhost:3000',
     protocol: 'http',
     headers: {
       'header1': 'value 1'
-    },
-    get: function (key) {
-      switch (key) {
-        case 'host':
-          return 'localhost:3000';
-        default:
-          return 'blahblah';
-      }
     },
     ip: '127.0.0.1',
     query: {
@@ -111,7 +103,7 @@ describe('moesif-express', function () {
       expect(moesifExpress({applicationId: TEST_API_SECRET_KEY}).length).to.equal(3);
     });
 
-    it('test one successful submission', function() {
+    it('test one successful submission without body', function() {
       function next(req, res, next) {
         res.end();
       }
@@ -120,7 +112,7 @@ describe('moesif-express', function () {
         next: next,
         req: {
           body: {},
-          url: '/hello'
+          url: '/testbasic'
         },
       };
       return loggerTestHelper(testHelperOptions).then(function (result) {
@@ -134,32 +126,32 @@ describe('moesif-express', function () {
 
     it('test moesif with body', function () {
       function next(req, res, next) {
-        res.end('{"bodycontent1": "bodycontent1"}');
+        res.end({"bodycontent1": "bodycontent1"});
       }
 
       var testHelperOptions = {
         next: next,
         req: {
           body: {},
-          url: '/hello'
+          url: '/testwithbody'
         }
       };
 
       return loggerTestHelper(testHelperOptions).then(function (result) {
-        expect(result.response.body).to.equal('{"bodycontent1": "bodycontent1"}');
+        expect(result.response.body.bodycontent1).to.equal('bodycontent1');
       });
     });
 
     it('test moesif with identifyUser function', function () {
       function next(req, res, next) {
-        res.end();
+        res.end('{"test": "test moesif with identifyUser function"}');
       }
 
       var testHelperOptions = {
         next: next,
         req: {
           body: {},
-          url: '/hello'
+          url: '/testwithidentifyuser'
         }
       };
 
@@ -175,10 +167,9 @@ describe('moesif-express', function () {
       });
     });
 
-
     it('test moesif with maskContent function', function () {
       function next(req, res, next) {
-        res.end();
+        res.end('{"test": "test moesif with maskContent function"}');
       }
 
       var testHelperOptions = {
@@ -189,8 +180,8 @@ describe('moesif-express', function () {
             'header2': 'value 2',
             'header3': 'value 3'
           },
-          body: {},
-          url: '/hello'
+          body: {'requestbody1': 'requestbody1'},
+          url: '/testwithmaskcontent'
         }
       };
 
@@ -208,6 +199,7 @@ describe('moesif-express', function () {
         expect(result.request.headers.header2).to.equal('value 2');
       });
     });
+
   });
 
 });
