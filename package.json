@@ -1,6 +1,6 @@
 {
   "name": "moesifapi-express",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Collection/Data Ingestion Middleware for Express",
   "main": "./lib/index.js",
   "keywords": [
@@ -19,7 +19,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Moesif/Moesif-API-NodeJS-Express"
+    "url": "https://github.com/Moesif/moesif-express"
   },
   "dependencies": {
     "async": "^2.1.2",
