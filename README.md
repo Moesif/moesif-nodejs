@@ -1,7 +1,12 @@
-Moesif Express Library
-=================
+Moesif Express Middleware SDK
+=============================
 
-This is library for Node.js Express to automatically submit data to Moesif for analysis.
+Express middleware to automatically submit data to Moesif for error analysis.
+
+[Source Code on GitHub](https://github.com/moesif/moesif-express)
+
+__Check out Moesif's
+[NodeJS developer documentation](https://www.moesif.com/developer-documentation/?javascript) to learn more__
 
 How To Install:
 =============
