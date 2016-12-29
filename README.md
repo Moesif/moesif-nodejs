@@ -9,7 +9,7 @@ __Check out Moesif's
 [NodeJS developer documentation](https://www.moesif.com/developer-documentation/?javascript) to learn more__
 
 How To Install:
-=============
+===============
 
 ```shell
 npm install --save moesif-express
@@ -29,15 +29,29 @@ var app = express();
 var moesifExpress = require('moesif-express');
 
 // Set the options, the only required field is applicationId.
-var moesif = moesifExpress({applicationId: 'Your moesif secrete key'});
+var options = {
+
+  applicationId: 'Your Moesif application_id',
+
+  identifyUser: function (req, res) {
+    if (req.user) {
+      return req.user.id;
+    }
+    return null;
+  },
+
+  getSessionToken: function (req, res) {
+    return req.headers['Authorization'];
+  }
+};
 
 // Load the Moesif middleware
-app.use(moesif);
+app.use(moesifExpress(options));
 
 ```
 
 List of Options:
-===========
+================
 
 1) `identifyUser`
 
@@ -97,9 +111,10 @@ options.getApiVersion = function (req, res) {
 Type: `(Request, Response) => Boolean`
 skip is a function that takes a express `req` and `res` arguments and returns true if the event should be skipped (i.e. not logged)
 ```javascript
-options.getApiVersion = function (req, res) {
+options.skip = function (req, res) {
   // your code here. must return a boolean.
   if (res.status === 404) {
+    // Skip (don't log) 404's
     return true;
   }
   return false
