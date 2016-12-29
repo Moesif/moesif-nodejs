@@ -1,5 +1,5 @@
 {
-  "name": "moesifapi-express",
+  "name": "moesif-express",
   "version": "1.0.3",
   "description": "Collection/Data Ingestion Middleware for Express",
   "main": "./lib/index.js",
