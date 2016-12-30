@@ -37,7 +37,7 @@ var options = {
     if (req.user) {
       return req.user.id;
     }
-    return null;
+    return undefined;
   },
 
   getSessionToken: function (req, res) {
