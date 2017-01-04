@@ -210,5 +210,5 @@ response.body | Required | Body of the response in JSON format
 6) `callback`
 
 Type: `error => null`
-callback is for errors. For example, if there is has been an error sending events 
-to moesif, you can investigate to see if there is any important integration. 
+callback is for internal errors. For example, if there is has been an error sending events 
+to moesif or network issue, you can use this to see if there is any issues with integration. 
