@@ -205,3 +205,10 @@ response.status | Required | HTTP status code such as 200 or 500
 request.ip_address | Optional | IP address of the responding server
 response.headers | Required | Headers of the response
 response.body | Required | Body of the response in JSON format
+
+
+6) `callback`
+
+Type: `error => null`
+callback is for errors. For example, if there is has been an error sending events 
+to moesif, you can investigate to see if there is any important integration. 
