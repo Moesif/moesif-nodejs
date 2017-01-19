@@ -1,7 +1,7 @@
 Moesif Express Middleware SDK
 =============================
 
-Express middleware to automatically submit data to Moesif for error analysis.
+Express middleware to automatically log API request/responses to Moesif for error analysis.
 
 [Source Code on GitHub](https://github.com/moesif/moesif-express)
 
@@ -70,7 +70,7 @@ options.identifyUser = function (req, res) {
 2) `getSessionToken`
 
 Type: `(Request, Response) => String`
-getSessionToken a function that takes express `req` and `res` arguments and returns a session Token.
+getSessionToken a function that takes express `req` and `res` arguments and returns a session token (i.e. such as an API key).
 
 ```javascript
 options.getSessionToken = function (req, res) {
@@ -98,7 +98,7 @@ options.getTags = function (req, res) {
 4) `getApiVersion`
 
 Type: `(Request, Response) => String`
-getApiVersion is a function that takes a express `req` and `res` arguments and returns a string to tag requests with the version of your API. Can be dependent on the request itself.
+getApiVersion is a function that takes a express `req` and `res` arguments and returns a string to tag requests with a specific version of your API.
 ```javascript
 options.getApiVersion = function (req, res) {
   // your code here. must return a string.
@@ -110,11 +110,12 @@ options.getApiVersion = function (req, res) {
 
 Type: `(Request, Response) => Boolean`
 skip is a function that takes a express `req` and `res` arguments and returns true if the event should be skipped (i.e. not logged)
+<br/>_The default is shown below and skips requests to the root path "/"._
 ```javascript
 options.skip = function (req, res) {
   // your code here. must return a boolean.
-  if (res.status === 404) {
-    // Skip (don't log) 404's
+  if (res.path === '/') {
+    // Skip probes to home page.
     return true;
   }
   return false
@@ -123,9 +124,9 @@ options.skip = function (req, res) {
 
 5) `maskContent`
 
-Type: `EventModel => EventModel`
-maskContent is a function that takes the final event object as an argument before we submit to Moesif.
-With maskContent, you can make modifications to headers or body of the event before it is sent to Moesif.
+Type: `MoesifEventModel => MoesifEventModel`
+maskContent is a function that takes the final Moesif event model (rather than the Express req/res objects) as an argument before being sent to Moesif.
+With maskContent, you can make modifications to headers or body such as removing certain header or body fields.
 
  ```javascript
  options.maskContent = function(event) {
@@ -183,7 +184,8 @@ With maskContent, you can make modifications to headers or body of the event bef
     }
   },
   "user_id": "mndug437f43",
-  "session_token":"end_user_session_token"
+  "session_token":"end_user_session_token",
+  "tags": "tag1, tag2"
 }
 
 ```
@@ -210,5 +212,5 @@ response.body | Required | Body of the response in JSON format
 6) `callback`
 
 Type: `error => null`
-callback is for internal errors. For example, if there is has been an error sending events 
-to moesif or network issue, you can use this to see if there is any issues with integration. 
+callback is for internal errors. For example, if there is has been an error sending events
+to moesif or network issue, you can use this to see if there is any issues with integration.
