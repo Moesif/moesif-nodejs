@@ -114,7 +114,7 @@ skip is a function that takes a express `req` and `res` arguments and returns tr
 ```javascript
 options.skip = function (req, res) {
   // your code here. must return a boolean.
-  if (res.path === '/') {
+  if (req.path === '/') {
     // Skip probes to home page.
     return true;
   }
