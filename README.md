@@ -1,5 +1,4 @@
-Moesif Express Middleware SDK
-=============================
+# Moesif Express Middleware SDK
 
 Express middleware to automatically log API request/responses to Moesif for error analysis.
 
@@ -8,15 +7,14 @@ Express middleware to automatically log API request/responses to Moesif for erro
 __Check out Moesif's
 [NodeJS developer documentation](https://www.moesif.com/developer-documentation/?javascript) to learn more__
 
-How To Install:
-===============
+## How To Install
 
 ```shell
 npm install --save moesif-express
 ```
 
-How To Use:
-===========
+## How To Use
+
 The following shows how import the controllers and use:
 
 1) Import the module:
@@ -50,8 +48,8 @@ app.use(moesifExpress(options));
 
 ```
 
-List of Options:
-================
+## Configraution Options
+
 
 1) `identifyUser`
 
