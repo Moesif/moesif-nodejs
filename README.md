@@ -4,9 +4,6 @@ Express middleware to automatically log API request/responses to Moesif for erro
 
 [Source Code on GitHub](https://github.com/moesif/moesif-express)
 
-__Check out Moesif's
-[NodeJS developer documentation](https://www.moesif.com/developer-documentation/?javascript) to learn more__
-
 ## How To Install
 
 ```shell
@@ -212,3 +209,13 @@ response.body | Required | Body of the response in JSON format
 Type: `error => null`
 callback is for internal errors. For example, if there is has been an error sending events
 to moesif or network issue, you can use this to see if there is any issues with integration.
+
+## Moesif NodeJs Library
+
+If you are using NodeJs but not ExpressJs, you can use Moesif NodeJs library instead. 
+
+__Check out Moesif's
+[NodeJS developer documentation](https://www.moesif.com/developer-documentation/?javascript) to learn more__
+
+
+
