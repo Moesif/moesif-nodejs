@@ -133,10 +133,10 @@ With maskContent, you can make modifications to headers or body such as removing
 
 
  ```javascript
- options.maskContent = function(event) {
-   // remove any field that you don't want to be sent to Moesif.
-   return event;
- }
+options.maskContent = function(event) {
+  // remove any field that you don't want to be sent to Moesif.
+  return event;
+}
  ```
 
 `EventModel` format:
