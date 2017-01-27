@@ -210,12 +210,7 @@ Type: `error => null`
 callback is for internal errors. For example, if there is has been an error sending events
 to moesif or network issue, you can use this to see if there is any issues with integration.
 
-## Moesif NodeJs Library
+## Other Integrations
 
-If you are using NodeJs but not ExpressJs, you can use Moesif NodeJs library instead. 
-
-__Check out Moesif's
-[NodeJS developer documentation](https://www.moesif.com/developer-documentation/?javascript) to learn more__
-
-
+To view more more documenation on integration options, please visit __[the Integration Options Documentation](https://www.moesif.com/docs/getting-started/integration-options/).__ 
 
