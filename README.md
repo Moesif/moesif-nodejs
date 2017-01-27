@@ -16,6 +16,7 @@ The following shows how import the controllers and use:
 
 1) Import the module:
 
+
 ```javascript
 // Import Modules
 var express = require('express');
@@ -55,6 +56,7 @@ identifyUser is a function that takes express `req` and `res` as arguments
 and returns a userId. This helps us attribute requests to unique users. Even though Moesif can
 automatically retrieve the userId without this, this is highly recommended to ensure accurate attribution.
 
+
 ```
 options.identifyUser = function (req, res) {
   // your code here, must return a string
@@ -66,6 +68,7 @@ options.identifyUser = function (req, res) {
 
 Type: `(Request, Response) => String`
 getSessionToken a function that takes express `req` and `res` arguments and returns a session token (i.e. such as an API key).
+
 
 ```javascript
 options.getSessionToken = function (req, res) {
@@ -79,6 +82,7 @@ options.getSessionToken = function (req, res) {
 Type: `(Request, Response) => String`
 getTags is a function that takes a express `req` and `res` arguments and returns a comma-separated string containing a list of tags.
 See Moesif documentation for full list of tags.
+
 
 ```javascript
 options.getTags = function (req, res) {
@@ -95,6 +99,7 @@ options.getTags = function (req, res) {
 Type: `(Request, Response) => String`
 getApiVersion is a function that takes a express `req` and `res` arguments and returns a string to tag requests with a specific version of your API.
 
+
 ```javascript
 options.getApiVersion = function (req, res) {
   // your code here. must return a string.
@@ -102,11 +107,13 @@ options.getApiVersion = function (req, res) {
 }
 ```
 
-4) `skip`
+5) `skip`
 
 Type: `(Request, Response) => Boolean`
 skip is a function that takes a express `req` and `res` arguments and returns true if the event should be skipped (i.e. not logged)
 <br/>_The default is shown below and skips requests to the root path "/"._
+
+
 ```javascript
 options.skip = function (req, res) {
   // your code here. must return a boolean.
@@ -118,11 +125,12 @@ options.skip = function (req, res) {
 }
 ```
 
-5) `maskContent`
+6) `maskContent`
 
 Type: `MoesifEventModel => MoesifEventModel`
 maskContent is a function that takes the final Moesif event model (rather than the Express req/res objects) as an argument before being sent to Moesif.
 With maskContent, you can make modifications to headers or body such as removing certain header or body fields.
+
 
  ```javascript
  options.maskContent = function(event) {
