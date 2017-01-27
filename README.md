@@ -94,6 +94,7 @@ options.getTags = function (req, res) {
 
 Type: `(Request, Response) => String`
 getApiVersion is a function that takes a express `req` and `res` arguments and returns a string to tag requests with a specific version of your API.
+
 ```javascript
 options.getApiVersion = function (req, res) {
   // your code here. must return a string.
