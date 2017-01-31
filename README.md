@@ -1,4 +1,4 @@
-# Moesif Express Middleware SDK
+# Moesif Express Middleware
 
 Express middleware to automatically capture _incoming_ REST API requests/responses and send to Moesif for error analysis.
 
