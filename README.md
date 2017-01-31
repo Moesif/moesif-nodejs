@@ -49,7 +49,7 @@ app.use(moesifExpress(options));
 ```
 
 ### 2. Enter Moesif Application Id.
-Your can find your Application Id from [_Moesif Dashboard_](https://www.moesif.com/) -> _Top Right Menu_ -> _App Setup_
+You can find your Application Id from [_Moesif Dashboard_](https://www.moesif.com/) -> _Top Right Menu_ -> _App Setup_
 
 ## Configuration options
 
