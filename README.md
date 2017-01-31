@@ -51,10 +51,10 @@ app.use(moesifExpress(options));
 ### 2. Enter Moesif Application Id.
 Your can find your Application Id from [_Moesif Dashboard_](https://www.moesif.com/) -> _Top Right Menu_ -> _App Setup_
 
-## Configuration Options
+## Configuration options
 
 
-#### `identifyUser`
+#### __`identifyUser`__
 
 Type: `(Request, Response) => String`
 identifyUser is a function that takes express `req` and `res` as arguments
@@ -69,7 +69,7 @@ options.identifyUser = function (req, res) {
 }
 ```
 
-#### `getSessionToken`
+#### __`getSessionToken`__
 
 Type: `(Request, Response) => String`
 getSessionToken a function that takes express `req` and `res` arguments and returns a session token (i.e. such as an API key).
@@ -82,7 +82,7 @@ options.getSessionToken = function (req, res) {
 }
 ```
 
-#### `getTags`
+#### __`getTags`__
 
 Type: `(Request, Response) => String`
 getTags is a function that takes a express `req` and `res` arguments and returns a comma-separated string containing a list of tags.
@@ -99,7 +99,7 @@ options.getTags = function (req, res) {
 }
 ```
 
-#### `getApiVersion`
+#### __`getApiVersion`__
 
 Type: `(Request, Response) => String`
 getApiVersion is a function that takes a express `req` and `res` arguments and returns a string to tag requests with a specific version of your API.
@@ -112,7 +112,7 @@ options.getApiVersion = function (req, res) {
 }
 ```
 
-#### `skip`
+#### __`skip`__
 
 Type: `(Request, Response) => Boolean`
 skip is a function that takes a express `req` and `res` arguments and returns true if the event should be skipped (i.e. not logged)
@@ -130,7 +130,7 @@ options.skip = function (req, res) {
 }
 ```
 
-#### `maskContent`
+#### __`maskContent`__
 
 Type: `MoesifEventModel => MoesifEventModel`
 maskContent is a function that takes the final Moesif event model (rather than the Express req/res objects) as an argument before being sent to Moesif.
@@ -225,6 +225,6 @@ Type: `error => null`
 callback is for internal errors. For example, if there is has been an error sending events
 to moesif or network issue, you can use this to see if there is any issues with integration.
 
-## Other Integrations
+## Other integrations
 
 To view more more documentation on integration options, please visit __[the Integration Options Documentation](https://www.moesif.com/docs/getting-started/integration-options/).__
