@@ -1,20 +1,22 @@
 # Moesif Express Middleware SDK
 
-Express middleware to automatically log API request/responses to Moesif for error analysis.
+Express middleware to automatically capture _incoming_ REST API requests/responses and send to Moesif for error analysis.
 
 [Source Code on GitHub](https://github.com/moesif/moesif-express)
 
-## How To Install
+[Package on NPMJS](https://www.npmjs.com/package/moesif-express)
+
+## How to install
 
 ```shell
 npm install --save moesif-express
 ```
 
-## How To Use
+## How to use
 
 The following shows how import the controllers and use:
 
-1) Import the module:
+### 1. Import the module:
 
 
 ```javascript
@@ -46,10 +48,13 @@ app.use(moesifExpress(options));
 
 ```
 
-## Configraution Options
+### 2. Enter Moesif Application Id.
+Your can find your Application Id from [_Moesif Dashboard_](https://www.moesif.com/) -> _Top Right Menu_ -> _App Setup_
+
+## Configuration Options
 
 
-1) `identifyUser`
+#### `identifyUser`
 
 Type: `(Request, Response) => String`
 identifyUser is a function that takes express `req` and `res` as arguments
@@ -64,7 +69,7 @@ options.identifyUser = function (req, res) {
 }
 ```
 
-2) `getSessionToken`
+#### `getSessionToken`
 
 Type: `(Request, Response) => String`
 getSessionToken a function that takes express `req` and `res` arguments and returns a session token (i.e. such as an API key).
@@ -77,7 +82,7 @@ options.getSessionToken = function (req, res) {
 }
 ```
 
-3) `getTags`
+#### `getTags`
 
 Type: `(Request, Response) => String`
 getTags is a function that takes a express `req` and `res` arguments and returns a comma-separated string containing a list of tags.
@@ -94,7 +99,7 @@ options.getTags = function (req, res) {
 }
 ```
 
-4) `getApiVersion`
+#### `getApiVersion`
 
 Type: `(Request, Response) => String`
 getApiVersion is a function that takes a express `req` and `res` arguments and returns a string to tag requests with a specific version of your API.
@@ -107,7 +112,7 @@ options.getApiVersion = function (req, res) {
 }
 ```
 
-5) `skip`
+#### `skip`
 
 Type: `(Request, Response) => Boolean`
 skip is a function that takes a express `req` and `res` arguments and returns true if the event should be skipped (i.e. not logged)
@@ -125,7 +130,7 @@ options.skip = function (req, res) {
 }
 ```
 
-6) `maskContent`
+#### `maskContent`
 
 Type: `MoesifEventModel => MoesifEventModel`
 maskContent is a function that takes the final Moesif event model (rather than the Express req/res objects) as an argument before being sent to Moesif.
@@ -194,7 +199,8 @@ options.maskContent = function(event) {
 
 ```
 
-For more documentation regarding what fields and meaning:
+For more documentation regarding what fields and meaning,
+see below or the [Moesif Node API Documentation](https://www.moesif.com/docs/api?javascript).
 
 Fields | Required | Description
 --------- | -------- | -----------
@@ -213,7 +219,7 @@ response.headers | Required | Headers of the response
 response.body | Required | Body of the response in JSON format
 
 
-6) `callback`
+#### `callback`
 
 Type: `error => null`
 callback is for internal errors. For example, if there is has been an error sending events
@@ -221,5 +227,4 @@ to moesif or network issue, you can use this to see if there is any issues with 
 
 ## Other Integrations
 
-To view more more documenation on integration options, please visit __[the Integration Options Documentation](https://www.moesif.com/docs/getting-started/integration-options/).__ 
-
+To view more more documentation on integration options, please visit __[the Integration Options Documentation](https://www.moesif.com/docs/getting-started/integration-options/).__
