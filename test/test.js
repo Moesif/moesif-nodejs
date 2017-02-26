@@ -12,7 +12,7 @@ var expect = require('chai').expect;
 var _ = require('lodash');
 var moesifExpress = require('../lib');
 
-var TEST_API_SECRET_KEY = 'eyJhcHAiOiIzNDU6MSIsInZlciI6IjIuMCIsIm9yZyI6Ijg4OjIiLCJpYXQiOjE0NzcwMDgwMDB9.576_l8Bza-gOoKzBR4_qnKEQOi2UYHh_FAK9IoDdUgc';
+var TEST_API_SECRET_KEY = 'eyJhcHAiOiIzMTU6MSIsInZlciI6IjIuMCIsIm9yZyI6IjM1MToxNSIsImlhdCI6MTQ4ODA2NzIwMH0.u92ValuJQJpu_ENd8N3MQuVErfuTi6aSvacsuWrpyuY';
 
 function mockReq(reqMock) {
   var reqSpec = _.extend({
@@ -103,102 +103,119 @@ describe('moesif-express', function () {
       expect(moesifExpress({applicationId: TEST_API_SECRET_KEY}).length).to.equal(3);
     });
 
-    it('test one successful submission without body', function() {
-      function next(req, res, next) {
-        res.end();
-      }
+    // it('test one successful submission without body', function(done) {
+    //   function next(req, res, next) {
+    //     res.end();
+    //   }
+    //
+    //   var testHelperOptions = {
+    //     next: next,
+    //     req: {
+    //       body: {},
+    //       url: '/testbasic'
+    //     },
+    //   };
+    //   return loggerTestHelper(testHelperOptions).then(function (result) {
+    //     expect(result.response).to.exist;
+    //     expect(result.request).to.exist;
+    //     done();
+    //     // console.log('result in tester is:' + JSON.stringify(result, null, '  '));
+    //   });
+    //
+    // });
 
-      var testHelperOptions = {
-        next: next,
-        req: {
-          body: {},
-          url: '/testbasic'
-        },
-      };
-      return loggerTestHelper(testHelperOptions).then(function (result) {
-        expect(result.response).to.exist;
-        expect(result.request).to.exist;
-        // console.log('result in tester is:' + JSON.stringify(result, null, '  '));
-      });
+    it('should be able to update user to Moesif.', function(done) {
+      var TMP_API_SECRET_KEY = 'eyJhcHAiOiIzMTU6MSIsInZlciI6IjIuMCIsIm9yZyI6IjM1MToxNSIsImlhdCI6MTQ4ODA2NzIwMH0.u92ValuJQJpu_ENd8N3MQuVErfuTi6aSvacsuWrpyuY';
 
+      var moesifMiddleware = moesifExpress({applicationId: TMP_API_SECRET_KEY});
+
+      moesifMiddleware.updateUser({userId: 'testuserexpress3', metadata: {email: 'abc@email.com', name: 'abcdef', image: '123'}},
+        function(error, response, context) {
+          expect(context.response.statusCode).to.equal(201);
+          if (error) done(error);
+          else done();
+        });
     });
 
 
-    it('test moesif with body', function () {
-      function next(req, res, next) {
-        res.end({"bodycontent1": "bodycontent1"});
-      }
+    // it('test moesif with body', function (done) {
+    //   function next(req, res, next) {
+    //     res.end({"bodycontent1": "bodycontent1"});
+    //   }
+    //
+    //   var testHelperOptions = {
+    //     next: next,
+    //     req: {
+    //       body: {},
+    //       url: '/testwithbody'
+    //     }
+    //   };
+    //
+    //   return loggerTestHelper(testHelperOptions).then(function (result) {
+    //     expect(result.response.body.bodycontent1).to.equal('bodycontent1');
+    //     done();
+    //   });
+    // });
 
-      var testHelperOptions = {
-        next: next,
-        req: {
-          body: {},
-          url: '/testwithbody'
-        }
-      };
+    // it('test moesif with identifyUser function', function (done) {
+    //   function next(req, res, next) {
+    //     res.end('{"test": "test moesif with identifyUser function"}');
+    //   }
+    //
+    //   var testHelperOptions = {
+    //     next: next,
+    //     req: {
+    //       body: {},
+    //       url: '/testwithidentifyuser'
+    //     }
+    //   };
+    //
+    //   var testMoesifOptions = {
+    //     applicationId: TEST_API_SECRET_KEY,
+    //     identifyUser: function (_req, _res) {
+    //       return 'abc';
+    //     }
+    //   };
+    //
+    //   return loggerTestHelper(testHelperOptions, testMoesifOptions).then(function (result) {
+    //     expect(result.userId).to.equal('abc');
+    //     done();
+    //   });
+    // });
 
-      return loggerTestHelper(testHelperOptions).then(function (result) {
-        expect(result.response.body.bodycontent1).to.equal('bodycontent1');
-      });
-    });
-
-    it('test moesif with identifyUser function', function () {
-      function next(req, res, next) {
-        res.end('{"test": "test moesif with identifyUser function"}');
-      }
-
-      var testHelperOptions = {
-        next: next,
-        req: {
-          body: {},
-          url: '/testwithidentifyuser'
-        }
-      };
-
-      var testMoesifOptions = {
-        applicationId: TEST_API_SECRET_KEY,
-        identifyUser: function (_req, _res) {
-          return 'abc';
-        }
-      };
-
-      return loggerTestHelper(testHelperOptions, testMoesifOptions).then(function (result) {
-        expect(result.userId).to.equal('abc');
-      });
-    });
-
-    it('test moesif with maskContent function', function () {
-      function next(req, res, next) {
-        res.end('{"test": "test moesif with maskContent function"}');
-      }
-
-      var testHelperOptions = {
-        next: next,
-        req: {
-          headers: {
-            'header1': 'value 1',
-            'header2': 'value 2',
-            'header3': 'value 3'
-          },
-          body: {'requestbody1': 'requestbody1'},
-          url: '/testwithmaskcontent'
-        }
-      };
-
-      var testMoesifOptions = {
-        applicationId: TEST_API_SECRET_KEY,
-        maskContent: function (_logData) {
-          var maskedLogData = _.extend({}, _logData);
-          maskedLogData.request.headers.header1 = undefined;
-          return maskedLogData;
-        }
-      };
-
-      return loggerTestHelper(testHelperOptions, testMoesifOptions).then(function (result) {
-        expect(result.request.headers.header1).to.not.exist;
-        expect(result.request.headers.header2).to.equal('value 2');
-      });
-    });
+    // it('test moesif with maskContent function', function (done) {
+    //   function next(req, res, next) {
+    //     res.end('{"test": "test moesif with maskContent function"}');
+    //   }
+    //
+    //   var testHelperOptions = {
+    //     next: next,
+    //     req: {
+    //       headers: {
+    //         'header1': 'value 1',
+    //         'header2': 'value 2',
+    //         'header3': 'value 3'
+    //       },
+    //       body: {'requestbody1': 'requestbody1'},
+    //       url: '/testwithmaskcontent'
+    //     }
+    //   };
+    //
+    //   var testMoesifOptions = {
+    //     applicationId: TEST_API_SECRET_KEY,
+    //     maskContent: function (_logData) {
+    //       var maskedLogData = _.extend({}, _logData);
+    //       maskedLogData.request.headers.header1 = undefined;
+    //       return maskedLogData;
+    //     }
+    //   };
+    //
+    //   return loggerTestHelper(testHelperOptions, testMoesifOptions).then(function (result) {
+    //     expect(result.request.headers.header1).to.not.exist;
+    //     expect(result.request.headers.header2).to.equal('value 2');
+    //     done();
+    //   });
+    // });
 
   });
 

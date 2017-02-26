@@ -225,6 +225,30 @@ Type: `error => null`
 callback is for internal errors. For example, if there is has been an error sending events
 to moesif or network issue, you can use this to see if there is any issues with integration.
 
+### updateUser method
+
+A method is attached to the moesif middleware object to update the users profile or metadata.
+
+
+```javascript
+
+var moesifMiddleware = moesifExpress(options);
+var user = {
+  userId: 'your user id',  // required.
+  metadata: {
+    email: 'user@email.com',
+    name: 'George'
+  }
+}
+
+moesifMiddleware.updateUser(user, callback);
+
+```
+
+The metadata field can be any custom data you want to set on the user. 
+The userId field is required. 
+
+
 ## Other integrations
 
 To view more more documentation on integration options, please visit __[the Integration Options Documentation](https://www.moesif.com/docs/getting-started/integration-options/).__
