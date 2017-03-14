@@ -247,7 +247,7 @@ describe('moesif-express', function () {
     });
 
 
-    it('test moesif with badformed json', function (done) {
+    it('test moesif with malformed json', function (done) {
       function next(req, res, next) {
         res.end('{[abcd: ');
       }
@@ -261,7 +261,7 @@ describe('moesif-express', function () {
             'header3': 'value 3'
           },
           body: '{"body1": "body1val"}',
-          url: '/testwithhtmlbody'
+          url: '/malformedbody'
         }
       };
 
