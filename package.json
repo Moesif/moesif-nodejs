@@ -27,7 +27,7 @@
     "express": "^4.14.0",
     "express-unless": "^0.3.0",
     "lodash": "^4.16.4",
-    "moesifapi": "^1.1.0",
+    "moesifapi": "^1.2.0",
     "raw-body": "^2.2.0",
     "request": "^2.55.0",
     "string": "^3.1.1"
