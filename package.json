@@ -1,6 +1,6 @@
 {
   "name": "moesif-express",
-  "version": "2.3.6",
+  "version": "2.3.7",
   "description": "Collection/Data Ingestion Middleware for Express",
   "main": "./lib/index.js",
   "keywords": [
@@ -24,21 +24,22 @@
   "dependencies": {
     "async": "^2.1.2",
     "debug": "^2.2.0",
-    "express": "^4.14.0",
-    "express-unless": "^0.3.0",
     "lodash": "^4.16.4",
     "moesifapi": "^1.2.5",
     "raw-body": "^2.2.0",
-    "request": "^2.55.0",
+    "request-ip": "^2.0.1",
     "string": "^3.1.1"
   },
   "devDependencies": {
     "assert": "^1.4.1",
     "chai": "^3.5.0",
+    "express": "^4.14.0",
+    "express-unless": "^0.3.0",
     "mocha": "^3.0.2",
     "blanket": "^1.2.2",
     "node-mocks-http": "^1.5.1",
     "promise": "^7.1.1",
+    "request": "^2.55.0",
     "should": "^8.2.2",
     "travis-cov": "^0.2.5",
     "util": "^0.10.3"
