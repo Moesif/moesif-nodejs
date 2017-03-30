@@ -51,6 +51,37 @@ app.use(moesifExpress(options));
 ### 2. Enter Moesif Application Id.
 You can find your Application Id from [_Moesif Dashboard_](https://www.moesif.com/) -> _Top Right Menu_ -> _App Setup_
 
+## Not using Express?
+If you're not using the express framework, you can still use this library.
+The library does not depend on express, so you can still call the middleware from a basic HTTP server.
+
+```javascript
+var moesifExpress = require('moesif-express');
+const http = require('http');
+
+var options = {
+  applicationId: 'Your Application Id'
+};
+
+var server = http.createServer(function (req, res) {
+  moesifExpress(options)(req, res, function () {
+    // Callback
+  });
+
+  req.on('end', function () {
+
+    res.write(JSON.stringify({
+      message: "hello world!",
+      id: 2
+    }));
+    res.end();
+  });
+});
+
+server.listen(8080);
+
+```
+
 ## Configuration options
 
 
@@ -245,8 +276,8 @@ moesifMiddleware.updateUser(user, callback);
 
 ```
 
-The metadata field can be any custom data you want to set on the user. 
-The userId field is required. 
+The metadata field can be any custom data you want to set on the user.
+The userId field is required.
 
 
 ## Other integrations
