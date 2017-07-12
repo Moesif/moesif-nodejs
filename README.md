@@ -279,6 +279,9 @@ moesifMiddleware.updateUser(user, callback);
 The metadata field can be any custom data you want to set on the user.
 The userId field is required.
 
+## Example
+
+[An example can be found here](https://github.com/Moesif/moesif-express-example).
 
 ## Other integrations
 
