@@ -149,9 +149,8 @@ options.getApiVersion = function (req, res) {
 #### __`getMetadata`__
 
 Type: `(Request, Response) => Object`
-getMetadata is a function that takes a express `req` and `res` and returns a object that allows you 
-to tag the event with metadata. The metadata must be a simple javascript object that can be converted
-to JSON. 
+getMetadata is a function that takes a express `req` and `res` and returns an object that allows you 
+to add custom metadata that will be associated with the req. The metadata must be a simple javascript object that can be converted to JSON. For example, you may want to save a VM instance_id, a trace_id, or a tenant_id with the request.
 
 
 ```javascript
