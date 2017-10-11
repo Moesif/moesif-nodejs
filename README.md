@@ -113,11 +113,14 @@ options.getSessionToken = function (req, res) {
 }
 ```
 
-#### __`getTags`__
+#### __`getTags`__ 
+
+__Will be deprecated. Please use getMetadata instead to provide metadata for events.__
 
 Type: `(Request, Response) => String`
 getTags is a function that takes a express `req` and `res` arguments and returns a comma-separated string containing a list of tags.
 See Moesif documentation for full list of tags.
+
 
 
 ```javascript
@@ -140,6 +143,24 @@ getApiVersion is a function that takes a express `req` and `res` arguments and r
 options.getApiVersion = function (req, res) {
   // your code here. must return a string.
   return '1.0.5'
+}
+```
+
+#### __`getMetadata`__
+
+Type: `(Request, Response) => Object`
+getMetadata is a function that takes a express `req` and `res` and returns a object that allows you 
+to tag the event with metadata. The metadata must be a simple javascript object that can be converted
+to JSON. 
+
+
+```javascript
+options.getMetadata = function (req, res) {
+  // your code here: 
+  return {
+    foo: 'custom data',
+    bar: 'another custom data'
+  };
 }
 ```
 
