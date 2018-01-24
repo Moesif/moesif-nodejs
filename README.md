@@ -188,7 +188,15 @@ maskContent is a function that takes the final Moesif event model (rather than t
 With maskContent, you can make modifications to headers or body such as removing certain header or body fields.
 
 
- ```javascript
+#### __`noAutoHideSensitive`__
+
+Type: boolean
+Default 'false'. Before sending any data for analysis, automatically check the data (headers and body) and one way
+hash strings or numbers that looks like a credit card or password. Turn this option
+to `true` if you want to implement your specific `maskContent` function or you want to send all data to be analyzed.
+
+
+```javascript
 options.maskContent = function(event) {
   // remove any field that you don't want to be sent to Moesif.
   return event;
