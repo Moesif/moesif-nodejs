@@ -13,7 +13,8 @@ if (RUN_TEST) {
 
     before(function() {
       var config = moesifapi.configuration;
-      config.ApplicationId = '';
+      config.ApplicationId =
+        '';
       // config.BaseUri = options.baseUri || options.BaseUri || config.BaseUri;
       var moesifController = moesifapi.ApiController;
       var logger = function(text) {
@@ -31,7 +32,12 @@ if (RUN_TEST) {
 
       options.getMetadata =
         options.getMetadata ||
-        function() {
+        function(req, res) {
+          console.log('test get metadata is called');
+          console.log(JSON.stringify(req.headers));
+          console.log(JSON.stringify(res.headers));
+          console.log(res.getHeader('Date'));
+          console.log(res.getHeader('date'));
           return undefined;
         };
 
@@ -56,8 +62,8 @@ if (RUN_TEST) {
           return eventData;
         };
       options.ignoreRoute = function() {
-          return false;
-        };
+        return false;
+      };
       options.skip =
         options.skip ||
         function(req, res) {
@@ -66,62 +72,152 @@ if (RUN_TEST) {
 
       var recorder = createRecorder(moesifController, options, logger);
 
-      patch(recorder, logger);
+      var unpatch = patch(recorder, logger);
+      console.log('patched successfully, return value of patch is');
+      console.log(unpatch);
     });
 
-    it('test simple http get request is captured', function(done) {
-      https.get({
-        host: 'jsonplaceholder.typicode.com',
-        path: '/posts/1'
-      }, function (res) {
-        var body = '';
-        res.on('data', function(d) {
-          body += d;
-        });
+    // it('test simple http get request is captured', function(done) {
+    //   https.get(
+    //     {
+    //       host: 'jsonplaceholder.typicode.com',
+    //       path: '/posts/1'
+    //     },
+    //     function(res) {
+    //       var body = '';
+    //       res.on('data', function(d) {
+    //         body += d;
+    //       });
 
-        res.on('end', function() {
-          var parsed = JSON.parse(body);
-          console.log(parsed);
-          setTimeout(function () {
-            // I need make sure the
-            // recorder's end is called
-            // before this ends.
-            done();
-          }, 2000);
-        });
-      })
-    });
+    //       res.on('end', function() {
+    //         var parsed = JSON.parse(body);
+    //         console.log(parsed);
+    //         setTimeout(function() {
+    //           // I need make sure the
+    //           // recorder's end is called
+    //           // before this ends.
+    //           done();
+    //         }, 2000);
+    //       });
+    //     }
+    //   );
+    // });
 
     // it('test a simple http post captured properly', function(done) {
-    //   var req = http.request({
-    //     method: 'POST',
-    //     host: 'jsonplaceholder.typicode.com',
-    //     path: '/posts'
-    //   }, function (res) {
-    //     var body = '';
-    //     res.on('data', function(d) {
-    //       body += d;
-    //     });
+    //   var req = http.request(
+    //     {
+    //       method: 'POST',
+    //       host: 'jsonplaceholder.typicode.com',
+    //       path: '/posts'
+    //     },
+    //     function(res) {
+    //       var body = '';
+    //       res.on('data', function(d) {
+    //         body += d;
+    //       });
 
-    //     res.on('end', function() {
-    //       var parsed = JSON.parse(body);
-    //       console.log(parsed);
-    //       setTimeout(function () {
-    //         // I need make sure the
-    //         // recorder's end is called
-    //         // before this ends.
-    //         done();
-    //       }, 500);
-    //     });
-    //   });
+    //       res.on('end', function() {
+    //         var parsed = JSON.parse(body);
+    //         console.log(parsed);
+    //         setTimeout(function() {
+    //           // I need make sure the
+    //           // recorder's end is called
+    //           // before this ends.
+    //           done();
+    //         }, 500);
+    //       });
+    //     }
+    //   );
 
-    //   req.write(JSON.stringify({
-    //     title: 'foo',
-    //     body: 'bar',
-    //     userId: 1
-    //   }));
+    //   req.write(
+    //     JSON.stringify({
+    //       title: 'foo',
+    //       body: 'bar',
+    //       userId: 1
+    //     })
+    //   );
 
     //   req.end();
     // });
+
+    // it('test a http post aborted', function(done) {
+    //   var req = http.request(
+    //     {
+    //       method: 'POST',
+    //       host: 'jsonplaceholder.typicode.com',
+    //       path: '/posts'
+    //     },
+    //     function(res) {
+    //       var body = '';
+    //       res.on('data', function(d) {
+    //         body += d;
+    //       });
+
+    //       res.on('end', function() {
+    //         var parsed = JSON.parse(body);
+    //         console.log(parsed);
+    //         setTimeout(function() {
+    //           // I need make sure the
+    //           // recorder's end is triggered
+    //           // before this ends.
+    //           done();
+    //         }, 500);
+    //       });
+    //     }
+    //   );
+
+    //   req.write(
+    //     JSON.stringify({
+    //       title: 'foo',
+    //       body: 'bar',
+    //       userId: 1
+    //     })
+    //   );
+
+    //   req.end();
+
+    //   setTimeout(function() {
+    //     console.log('about to call abort');
+    //     req.abort();
+    //     setTimeout(function() {
+    //       done();
+    //     }, 200)
+    //   }, 100);
+    // });
+
+
+    it('test a non json string body', function(done) {
+      var req = http.request(
+        {
+          method: 'POST',
+          host: 'jsonplaceholder.typicode.com',
+          path: '/posts'
+        },
+        function(res) {
+          var body = '';
+          res.on('data', function(d) {
+            body += d;
+          });
+
+          res.on('end', function() {
+            var parsed = JSON.parse(body);
+            console.log(parsed);
+            setTimeout(function() {
+              // I need make sure the
+              // recorder's end is triggered
+              // before this ends.
+              done();
+            }, 500);
+          });
+        }
+      );
+
+      req.write('not a json');
+
+      req.end();
+    });
+
+
+    // end of describe
   });
 }
