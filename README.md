@@ -113,7 +113,7 @@ options.getSessionToken = function (req, res) {
 }
 ```
 
-#### __`getTags`__ 
+#### __`getTags`__
 
 __Will be deprecated. Please use getMetadata instead to provide metadata for events.__
 
@@ -149,13 +149,13 @@ options.getApiVersion = function (req, res) {
 #### __`getMetadata`__
 
 Type: `(Request, Response) => Object`
-getMetadata is a function that takes a express `req` and `res` and returns an object that allows you 
+getMetadata is a function that takes a express `req` and `res` and returns an object that allows you
 to add custom metadata that will be associated with the req. The metadata must be a simple javascript object that can be converted to JSON. For example, you may want to save a VM instance_id, a trace_id, or a tenant_id with the request.
 
 
 ```javascript
 options.getMetadata = function (req, res) {
-  // your code here: 
+  // your code here:
   return {
     foo: 'custom data',
     bar: 'another custom data'
@@ -304,6 +304,33 @@ moesifMiddleware.updateUser(user, callback);
 
 The metadata field can be any custom data you want to set on the user.
 The userId field is required.
+
+### startCaptureOutgoing method
+
+Since `moesif-express` runs in the node environment, if you want to capture all
+outgoing API calls from your node App, this method to start capture outgoing methods.
+
+```javascript
+var moesifMiddleware = moesifExpress(options);
+moesifMiddleware.startCaptureOutgoing();
+```
+
+This method can be used to capture outgoing API calls even if you are not using express or having
+any incoming API calls.
+
+Note, the same set of options is also applied to outgoing API calls, with this key difference below:
+
+For options that take `req` and `res` as input parameters, the request and response objects passed in
+are not the express or node req or res objects. They are mocked request and response objects with these fields set:
+
+- *_mo_mocked*: a field that is set to `true` if is a mocked request or response object.
+- *headers*: object, a mapping of header names to header values.
+- *url*: string. available on the mocked request object.
+- *method*: string. available on the mocked request object.
+- *statusCode*: number. available on the mocked response object.
+- *getHeader*: function. (string) => string.
+- *body*: JSON object.
+
 
 ## Example
 
