@@ -1,5 +1,6 @@
 'use strict';
 var http = require('http');
+var https = require('https');
 var moesifapi = require('moesifapi');
 var patch = require('../lib/outgoing');
 var createRecorder = require('../lib/outgoingRecorder');
@@ -47,16 +48,14 @@ if (RUN_TEST) {
       options.getApiVersion =
         options.getApiVersion ||
         function() {
-          return undefined;
+          return '123,523';
         };
       options.maskContent =
         options.maskContent ||
         function(eventData) {
           return eventData;
         };
-      options.ignoreRoute =
-        options.ignoreRoute ||
-        function() {
+      options.ignoreRoute = function() {
           return false;
         };
       options.skip =
@@ -71,7 +70,7 @@ if (RUN_TEST) {
     });
 
     it('test simple http get request is captured', function(done) {
-      http.get({
+      https.get({
         host: 'jsonplaceholder.typicode.com',
         path: '/posts/1'
       }, function (res) {
@@ -93,5 +92,36 @@ if (RUN_TEST) {
       })
     });
 
+    // it('test a simple http post captured properly', function(done) {
+    //   var req = http.request({
+    //     method: 'POST',
+    //     host: 'jsonplaceholder.typicode.com',
+    //     path: '/posts'
+    //   }, function (res) {
+    //     var body = '';
+    //     res.on('data', function(d) {
+    //       body += d;
+    //     });
+
+    //     res.on('end', function() {
+    //       var parsed = JSON.parse(body);
+    //       console.log(parsed);
+    //       setTimeout(function () {
+    //         // I need make sure the
+    //         // recorder's end is called
+    //         // before this ends.
+    //         done();
+    //       }, 500);
+    //     });
+    //   });
+
+    //   req.write(JSON.stringify({
+    //     title: 'foo',
+    //     body: 'bar',
+    //     userId: 1
+    //   }));
+
+    //   req.end();
+    // });
   });
 }
