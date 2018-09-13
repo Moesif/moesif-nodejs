@@ -12,7 +12,7 @@ var expect = require('chai').expect;
 var _ = require('lodash');
 var moesifExpress = require('../lib');
 
-// replace with an moesif applicatin id token.
+// replace with an moesif applicatin id token to test..
 var TEST_API_SECRET_KEY = '';
 var RUN_TEST = false;
 
