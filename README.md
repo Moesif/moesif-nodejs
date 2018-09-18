@@ -1,10 +1,17 @@
 # Moesif Express Middleware
 
-Express middleware to automatically capture _incoming_ REST API requests/responses and send to Moesif for error analysis.
+Node.js Express middleware to automatically capture _incoming_ and/or _outgoing_
+API requests/responses and send to Moesif for API debugging and analytics.
 
 [Source Code on GitHub](https://github.com/moesif/moesif-express)
 
 [Package on NPMJS](https://www.npmjs.com/package/moesif-express)
+
+Notes:
+- The SDK is called `moesif-express` for historical reasons but works on
+any Node.js API regardless if the Express Framework is used.
+- The library can capture both incoming and outgoing API Calls depending on how
+you configure the SDK (See examples).
 
 ## How to install
 
@@ -20,16 +27,16 @@ The following shows how import the controllers and use:
 
 
 ```javascript
-// Import Modules
+
+// 1. Import Modules
 var express = require('express');
 var app = express();
-
 var moesifExpress = require('moesif-express');
 
-// Set the options, the only required field is applicationId.
+// 2. Set the options, the only required field is applicationId.
 var options = {
 
-  applicationId: 'Your Moesif application_id',
+  applicationId: 'Your Moesif Application Id',
 
   identifyUser: function (req, res) {
     if (req.user) {
@@ -43,8 +50,17 @@ var options = {
   }
 };
 
-// Load the Moesif middleware
-app.use(moesifExpress(options));
+// 3. Initialize the middleware object with options
+var moesifMiddleware = moesifExpress(options);
+
+
+// 4a. Start capturing outgoing API Calls to 3rd parties like Stripe
+// Skip this step if you don't want to capture outgoing API calls
+moesifMiddleware.startCaptureOutgoing();
+
+// 4b. Use the Moesif middleware to start capturing incoming API Calls
+// Skip this step if you don't want to capture incoming API calls
+app.use(moesifMiddleware);
 
 ```
 
@@ -305,36 +321,38 @@ moesifMiddleware.updateUser(user, callback);
 The metadata field can be any custom data you want to set on the user.
 The userId field is required.
 
-### startCaptureOutgoing method
+## Capture Outgoing
 
-Since `moesif-express` runs in the node environment, if you want to capture all
-outgoing API calls from your node App, this method to start capture outgoing methods.
+If you want to capture all outgoing API calls from your Node.js app to third parties like
+Stripe or to your own dependencies, call `startCaptureOutgoing()` to start capturing.
 
 ```javascript
 var moesifMiddleware = moesifExpress(options);
 moesifMiddleware.startCaptureOutgoing();
 ```
 
-This method can be used to capture outgoing API calls even if you are not using express or having
-any incoming API calls.
+This method can be used to capture outgoing API calls even if you are not using the Express Middleware or having any incoming API calls.
 
-Note, the same set of options is also applied to outgoing API calls, with this key difference below:
+The same set of above options is also applied to outgoing API calls, with a few key differences:
 
-For options that take `req` and `res` as input parameters, the request and response objects passed in
-are not the express or node req or res objects. They are mocked request and response objects with these fields set:
+For options functions that take `req` and `res` as input arguments, the request and response objects passed in
+are not Express or Node.js req or res objects when the request is outgoing, but Moesif does mock
+some of the fields for convenience.
+Only a subset of the Node.js req/res fields are available. Specifically:
 
-- *_mo_mocked*: a field that is set to `true` if is a mocked request or response object.
-- *headers*: object, a mapping of header names to header values.
-- *url*: string. available on the mocked request object.
-- *method*: string. available on the mocked request object.
-- *statusCode*: number. available on the mocked response object.
-- *getHeader*: function. (string) => string.
-- *body*: JSON object.
+- *_mo_mocked*: Set to `true` if it is a mocked request or response object (i.e. outgoing API Call)
+- *headers*: object, a mapping of header names to header values. Case sensitive
+- *url*: string. Full request URL.
+- *method*: string. Method/verb such as GET or POST.
+- *statusCode*: number. Response HTTP status code
+- *getHeader*: function. (string) => string. Reads out a header on the request. Name is case insensitive
+- *get*: function. (string) => string. Reads out a header on the request. Name is case insensitive
+- *body*: JSON object. The request body as sent to Moesif
 
 
 ## Example
 
-[An example can be found here](https://github.com/Moesif/moesif-express-example).
+[A complete example available is available on GitHub](https://github.com/Moesif/moesif-express-example).
 
 ## Other integrations
 
