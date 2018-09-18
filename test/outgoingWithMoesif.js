@@ -13,8 +13,7 @@ if (RUN_TEST) {
 
     before(function() {
       var config = moesifapi.configuration;
-      config.ApplicationId =
-        '';
+      config.ApplicationId = '';
       // config.BaseUri = options.baseUri || options.BaseUri || config.BaseUri;
       var moesifController = moesifapi.ApiController;
       var logger = function(text) {
@@ -185,7 +184,6 @@ if (RUN_TEST) {
     //   }, 100);
     // });
 
-
     it('test a non json string body', function(done) {
       var req = http.request(
         {
@@ -216,7 +214,6 @@ if (RUN_TEST) {
 
       req.end();
     });
-
 
     // end of describe
   });
