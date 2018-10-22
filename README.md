@@ -2,7 +2,7 @@
 
 [![NPM](https://nodei.co/npm/moesif-express.png?compact=true&stars=true)](https://nodei.co/npm/moesif-express/)
 
-[![Built For express][ico-built-for]][link-built-for]
+[![Built For][ico-built-for]][link-built-for]
 [![Total Downloads][ico-downloads]][link-downloads]
 [![Software License][ico-license]][link-license]
 [![Source Code][ico-source]][link-source]
