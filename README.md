@@ -350,9 +350,11 @@ Only a subset of the Node.js req/res fields are available. Specifically:
 - *body*: JSON object. The request body as sent to Moesif
 
 
-## Example
+## Examples
 
-[A complete example available is available on GitHub](https://github.com/Moesif/moesif-express-example).
+- [A complete example available is available on GitHub](https://github.com/Moesif/moesif-express-example).
+
+- [An example of integration with Apollo.js with support for GraphQL.](https://github.com/Moesif/moesif-apollo-graphql-example)
 
 ## Other integrations
 
