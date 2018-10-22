@@ -366,10 +366,10 @@ Only a subset of the Node.js req/res fields are available. Specifically:
 To view more more documentation on integration options, please visit __[the Integration Options Documentation](https://www.moesif.com/docs/getting-started/integration-options/).__
 
 
-[ico-built-for]: https://img.shields.io/badge/built%20for-express-blue.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/npm/dt/moesif-express.svg?style=flat-square
-[ico-license]: https://img.shields.io/badge/License-Apache%202.0-green.svg?style=flat-square
-[ico-source]: https://img.shields.io/github/last-commit/badges/shields.svg?style=social
+[ico-built-for]: https://img.shields.io/badge/built%20for-express-blue.svg
+[ico-downloads]: https://img.shields.io/npm/dt/moesif-express.svg
+[ico-license]: https://img.shields.io/badge/License-Apache%202.0-green.svg
+[ico-source]: https://img.shields.io/github/last-commit/moesif/moesif-express.svg?style=social
 
 [link-built-for]: https://expressjs.com/
 [link-downloads]: https://www.npmjs.com/package/moesif-express
