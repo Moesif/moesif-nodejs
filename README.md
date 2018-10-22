@@ -4,8 +4,8 @@
 
 [![Built For express][ico-built-for]][link-built-for]
 [![Total Downloads][ico-downloads]][link-downloads]
-[![Software License][ico-license]](link-license)
-[![Source Code][ico-source]](link-source)
+[![Software License][ico-license]][link-license]
+[![Source Code][ico-source]][link-source]
 
 Node.js Express middleware to automatically capture _incoming_ and/or _outgoing_
 API requests/responses and send to Moesif for API debugging and analytics.
@@ -372,6 +372,6 @@ To view more more documentation on integration options, please visit __[the Inte
 [ico-source]: https://img.shields.io/github/last-commit/badges/shields.svg?style=social
 
 [link-built-for]: https://expressjs.com/
-[link-downloads]: https://packagist.org/packages/moesif/moesif-express
+[link-downloads]: https://www.npmjs.com/package/moesif-express
 [link-license]: https://raw.githubusercontent.com/Moesif/moesif-express/master/LICENSE
 [link-source]: https://github.com/moesif/moesif-express
