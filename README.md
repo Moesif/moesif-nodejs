@@ -1,11 +1,16 @@
 # Moesif Express Middleware
 
+[![NPM](https://nodei.co/npm/moesif-express.png?compact=true&stars=true)](https://nodei.co/npm/moesif-express/)
+
+[![Built For express][ico-built-for]][link-built-for]
+[![Total Downloads][ico-downloads]][link-downloads]
+[![Software License][ico-license]](link-license)
+[![Source Code][ico-source]](link-source)
+
 Node.js Express middleware to automatically capture _incoming_ and/or _outgoing_
 API requests/responses and send to Moesif for API debugging and analytics.
 
 [Source Code on GitHub](https://github.com/moesif/moesif-express)
-
-[Package on NPMJS](https://www.npmjs.com/package/moesif-express)
 
 Notes:
 - The SDK is called `moesif-express` for historical reasons but works on
@@ -359,3 +364,14 @@ Only a subset of the Node.js req/res fields are available. Specifically:
 ## Other integrations
 
 To view more more documentation on integration options, please visit __[the Integration Options Documentation](https://www.moesif.com/docs/getting-started/integration-options/).__
+
+
+[ico-built-for]: https://img.shields.io/badge/built%20for-express-blue.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/npm/dt/moesif-express.svg?style=flat-square
+[ico-license]: https://img.shields.io/badge/License-Apache%202.0-green.svg?style=flat-square
+[ico-source]: https://img.shields.io/github/last-commit/badges/shields.svg?style=social
+
+[link-built-for]: https://expressjs.com/
+[link-downloads]: https://packagist.org/packages/moesif/moesif-express
+[link-license]: https://raw.githubusercontent.com/Moesif/moesif-express/master/LICENSE
+[link-source]: https://github.com/moesif/moesif-express
