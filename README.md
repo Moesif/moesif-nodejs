@@ -303,9 +303,24 @@ Type: `error => null`
 callback is for internal errors. For example, if there is has been an error sending events
 to moesif or network issue, you can use this to see if there is any issues with integration.
 
+#### __`disableBatching`__
+
+Type: boolean
+Default 'false'. By default, Moesif Express batches the Events. Turn this to true, this if you would like to send the API events one by one.
+
+#### __`batchSize`__
+
+Type: number
+Default 25. If batching is not disabled, this is the batchSize of API events that will trigger flushing of queue and sending the data to Moesif. If set, must be greater than 1.
+
+#### __`batchMaxTime`__
+
+Type: number in milliseconds
+Default 2000. If batching is not disabled, this is the maximum wait time (approximately) before triggering flushing of the queue and sending to Moesif. If set, it must be greater than 500 (milliseconds).
+
 ### updateUser method
 
-A method is attached to the moesif middleware object to update the users profile or metadata.
+A method is attached to the Moesif middleware object to update the users profile or metadata.
 
 
 ```javascript
