@@ -301,7 +301,7 @@ to `true` if you want to implement your specific `maskContent` function or you w
 
 Type: `error => null`
 callback is for internal errors. For example, if there is has been an error sending events
-to moesif or network issue, you can use this to see if there is any issues with integration.
+to Moesif or network issue, you can use this to see if there is any issues with integration.
 
 #### __`disableBatching`__
 
