@@ -286,7 +286,7 @@ request.body | Optional | Body of the request in JSON format
 ||
 response.time | Required | Timestamp for the response in ISO 8601 format
 response.status | Required | HTTP status code such as 200 or 500
-request.ip_address | Optional | IP address of the responding server
+response.ip_address | Optional | IP address of the responding server
 response.headers | Required | Headers of the response
 response.body | Required | Body of the response in JSON format
 
