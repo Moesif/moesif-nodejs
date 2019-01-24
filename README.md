@@ -1,4 +1,4 @@
-# Moesif Express Middleware
+# Moesif Node.js Middleware
 
 [![NPM](https://nodei.co/npm/moesif-express.png?compact=true&stars=true)](https://nodei.co/npm/moesif-express/)
 
@@ -7,7 +7,7 @@
 [![Software License][ico-license]][link-license]
 [![Source Code][ico-source]][link-source]
 
-Node.js Express middleware to automatically capture _incoming_ and/or _outgoing_
+Node.js middleware to automatically capture _incoming_ or _outgoing_
 API requests/responses and send to Moesif for API debugging and analytics.
 
 [Source Code on GitHub](https://github.com/moesif/moesif-express)
