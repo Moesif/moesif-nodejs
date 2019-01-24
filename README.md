@@ -12,11 +12,10 @@ API requests/responses and send to Moesif for API debugging and analytics.
 
 [Source Code on GitHub](https://github.com/moesif/moesif-express)
 
-Notes:
-- The SDK is called `moesif-express` for historical reasons but works on
-any Node.js API regardless if the Express Framework is used.
-- The library can capture both incoming and outgoing API Calls depending on how
-you configure the SDK (See examples).
+## Notes
+- The SDK is called `moesif-express` for historical reasons but compatible with any Node.js app regardless if Express Framework is used.
+- The library can capture both _incoming_ and _outgoing_ API Calls depending on how you configure the SDK (See examples).
+- To ensure req body is captured, if you use a body parser middleware like `body-parser`, apply Moesif middleware _after_ it.
 
 ## How to install
 
@@ -64,6 +63,7 @@ var moesifMiddleware = moesifExpress(options);
 moesifMiddleware.startCaptureOutgoing();
 
 // 4b. Use the Moesif middleware to start capturing incoming API Calls
+// If you have a body parser middleware, apply Moesif middleware after any body parsers.
 // Skip this step if you don't want to capture incoming API calls
 app.use(moesifMiddleware);
 
@@ -381,7 +381,7 @@ Only a subset of the Node.js req/res fields are available. Specifically:
 To view more more documentation on integration options, please visit __[the Integration Options Documentation](https://www.moesif.com/docs/getting-started/integration-options/).__
 
 
-[ico-built-for]: https://img.shields.io/badge/built%20for-express-blue.svg
+[ico-built-for]: https://img.shields.io/badge/built%20for-node.js-blue.svg
 [ico-downloads]: https://img.shields.io/npm/dt/moesif-express.svg
 [ico-license]: https://img.shields.io/badge/License-Apache%202.0-green.svg
 [ico-source]: https://img.shields.io/github/last-commit/moesif/moesif-express.svg?style=social
