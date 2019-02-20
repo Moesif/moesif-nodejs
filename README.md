@@ -110,8 +110,23 @@ server.listen(8080);
 
 Type: `(Request, Response) => String`
 identifyUser is a function that takes express `req` and `res` as arguments
-and returns a userId. This helps us attribute requests to unique users. Even though Moesif can
+and returns a `userId`. This helps us attribute requests to unique users. Even though Moesif can
 automatically retrieve the userId without this, this is highly recommended to ensure accurate attribution.
+
+
+```
+options.identifyUser = function (req, res) {
+  // your code here, must return a string
+  return req.user.id
+}
+```
+
+#### __`identifyCompany`__
+
+Type: `(Request, Response) => String`
+identifyCompany is a function that takes express `req` and `res` as arguments
+and returns a `companyId`. This helps us attribute requests to companies. If your service is B2B, it may
+make sense to identify consumers of your APIs with `companyId`s.
 
 
 ```
@@ -320,7 +335,7 @@ Default 2000. If batching is not disabled, this is the maximum wait time (approx
 
 ### updateUser method
 
-A method is attached to the Moesif middleware object to update the users profile or metadata.
+A method is attached to the Moesif middleware object to update the user's profile or metadata.
 
 
 ```javascript
@@ -335,6 +350,25 @@ var user = {
 }
 
 moesifMiddleware.updateUser(user, callback);
+
+```
+
+### updateCompany method
+
+A method is attached to the Moesif middleware object to update the company's profile or metadata.
+
+
+```javascript
+
+var moesifMiddleware = moesifExpress(options);
+var company = {
+  companyId: 'your company id',  // required.
+  metadata: {
+    numEmployees: 9001
+  }
+}
+
+moesifMiddleware.updateCompany(user, callback);
 
 ```
 
