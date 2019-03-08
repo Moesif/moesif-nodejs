@@ -8,7 +8,7 @@ var app = express();
 
 var moesifExpress = require('./lib');
 
-var TEST_API_SECRET_KEY = 'eyJhcHAiOiIzNDU6MSIsInZlciI6IjIuMCIsIm9yZyI6Ijg4OjIiLCJpYXQiOjE0NzcwMDgwMDB9.576_l8Bza-gOoKzBR4_qnKEQOi2UYHh_FAK9IoDdUgc';
+var TEST_API_SECRET_KEY = 'eyJhcHAiOiI5NDo5MiIsInZlciI6IjIuMCIsIm9yZyI6IjExNjoxMDQiLCJpYXQiOjE1NTIwMDMyMDB9.mtudzMSLcpfq0iTle-qTJLMJqBYirHqwrKG-Rz9oOaM';
 
 var moesifMiddleWare = moesifExpress({applicationId: TEST_API_SECRET_KEY});
 
