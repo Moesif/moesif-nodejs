@@ -33,7 +33,8 @@
     "lodash": "^4.17.11",
     "moesifapi": "^2.0.0",
     "raw-body": "^2.3.3",
-    "request-ip": "^2.1.3"
+    "request-ip": "^2.1.3",
+    "uuid4": "^1.1.4"
   },
   "devDependencies": {
     "assert": "^1.4.1",
