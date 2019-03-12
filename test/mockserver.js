@@ -14,7 +14,7 @@ var moesifExpress = require('../lib');
 
 // replace with an moesif applicatin id token to test..
 var TEST_API_SECRET_KEY = '';
-var RUN_TEST = false;
+var RUN_TEST = true;
 
 function mockReq(reqMock) {
   var reqSpec = _.extend(
@@ -128,8 +128,8 @@ if (RUN_TEST) {
           .then(function(result) {
             // console.log('inside callback of loggerTesthelper');
             // console.log(JSON.stringify(result));
-            expect(result.response).to.exist;
-            expect(result.request).to.exist;
+            expect(result[0].response).to.exist;
+            expect(result[0].request).to.exist;
             done();
             // console.log('result in tester is:' + JSON.stringify(result, null, '  '));
           })
@@ -153,7 +153,7 @@ if (RUN_TEST) {
 
         loggerTestHelper(testHelperOptions)
           .then(function(result) {
-            expect(result.response.body.bodycontent1).to.equal('bodycontent1');
+            expect(result[0].response.body.bodycontent1).to.equal('bodycontent1');
             done();
           })
           .catch(function(err) {
@@ -183,7 +183,7 @@ if (RUN_TEST) {
 
         loggerTestHelper(testHelperOptions, testMoesifOptions)
           .then(function(result) {
-            expect(result.userId).to.equal('abc');
+            expect(result[0].userId).to.equal('abc');
             done();
           })
           .catch(function(err) {
@@ -220,8 +220,8 @@ if (RUN_TEST) {
 
         loggerTestHelper(testHelperOptions, testMoesifOptions)
           .then(function(result) {
-            expect(result.request.headers.header1).to.not.exist;
-            expect(result.request.headers.header2).to.equal('value 2');
+            expect(result[0].request.headers.header1).to.not.exist;
+            expect(result[0].request.headers.header2).to.equal('value 2');
             done();
           })
           .catch(function(err) {
@@ -253,8 +253,8 @@ if (RUN_TEST) {
 
         loggerTestHelper(testHelperOptions, testMoesifOptions)
           .then(function(result) {
-            expect(result.request.transferEncoding).to.equal('base64');
-            expect(result.response.transferEncoding).to.equal('base64');
+            expect(result[0].request.transferEncoding).to.equal('base64');
+            expect(result[0].response.transferEncoding).to.equal('base64');
             done();
           })
           .catch(function(err) {

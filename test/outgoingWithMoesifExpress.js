@@ -5,7 +5,7 @@ var patch = require('../lib/outgoing');
 var moesifExpress = require('../lib');
 var _ = require('lodash');
 
-var RUN_TEST = false;
+var RUN_TEST = true;
 
 if (RUN_TEST) {
   describe('test capture using actual moesif express attached api', function() {
@@ -14,8 +14,7 @@ if (RUN_TEST) {
     before(function() {
       var options = {
         debug: false,
-        applicationId:
-          ''
+        applicationId:''
       };
       // function to identify user.
       options.identifyUser =
