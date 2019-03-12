@@ -406,13 +406,13 @@ Only a subset of the Node.js req/res fields are available. Specifically:
 
 ## Examples
 
-- [A complete example available is available on GitHub](https://github.com/Moesif/moesif-express-example).
+- [A complete example is available on GitHub](https://github.com/Moesif/moesif-express-example).
 
 - [An example of integration with Apollo.js with support for GraphQL.](https://github.com/Moesif/moesif-apollo-graphql-example)
 
 ## Other integrations
 
-To view more more documentation on integration options, please visit __[the Integration Options Documentation](https://www.moesif.com/docs/getting-started/integration-options/).__
+To view more documentation on integration options, please visit __[the Integration Options Documentation](https://www.moesif.com/docs/getting-started/integration-options/).__
 
 
 [ico-built-for]: https://img.shields.io/badge/built%20for-node.js-blue.svg

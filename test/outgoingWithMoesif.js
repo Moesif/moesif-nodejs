@@ -5,7 +5,7 @@ var moesifapi = require('moesifapi');
 var patch = require('../lib/outgoing');
 var createRecorder = require('../lib/outgoingRecorder');
 
-var RUN_TEST = false;
+var RUN_TEST = true;
 
 if (RUN_TEST) {
   describe('test capture using actual moesif api', function() {
@@ -69,7 +69,24 @@ if (RUN_TEST) {
           return false;
         };
 
-      var recorder = createRecorder(moesifController, options, logger);
+      var trySaveEventLocal = function(eventData) {
+        moesifController.createEvent(new moesifapi.EventModel(eventData), function(err) {
+          console.log('moesif API callback err=' + err);
+          if (err) {
+            console.log('moesif API failed with error.');
+            if (options.callback) {
+              options.callback(err, eventData);
+            }
+          } else {
+              console.log('moesif API succeeded');
+            if (options.callback) {
+              options.callback(null, eventData);
+            }
+          }
+        });
+      };
+
+      var recorder = createRecorder(trySaveEventLocal, options, logger);
 
       var unpatch = patch(recorder, logger);
       console.log('patched successfully, return value of patch is');
