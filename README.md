@@ -110,11 +110,11 @@ server.listen(8080);
 
 Type: `(Request, Response) => String`
 identifyUser is a function that takes express `req` and `res` as arguments
-and returns a `userId`. This helps us attribute requests to unique users. Even though Moesif can
-automatically retrieve the userId without this, this is highly recommended to ensure accurate attribution.
+and returns a `userId`. This enables Moesif to attribute API requests to individual unique users
+so you can understand who calling your API. This can be used simultaneously with `identifyCompany`
+to track both individual customers and the companies their a part of.
 
-
-```
+```javascript
 options.identifyUser = function (req, res) {
   // your code here, must return a string
   return req.user.id
@@ -125,14 +125,15 @@ options.identifyUser = function (req, res) {
 
 Type: `(Request, Response) => String`
 identifyCompany is a function that takes express `req` and `res` as arguments
-and returns a `companyId`. This helps us attribute requests to companies. If your service is B2B, it may
-make sense to identify consumers of your APIs with `companyId`s.
+and returns a `companyId`. If your business is B2B, this enables Moesif to attribute 
+API requests to specific companies or organizations so you can understand which accounts are 
+calling your API. This can be used simultaneously with `identifyUser` to track both 
+individual customers and the companies their a part of. 
 
-
-```
-options.identifyUser = function (req, res) {
+```javascript
+options.identifyCompany = function (req, res) {
   // your code here, must return a string
-  return req.user.id
+  return req.headers['X-Organization-Id']
 }
 ```
 
