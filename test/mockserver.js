@@ -313,6 +313,48 @@ if (RUN_TEST) {
           }
         );
       });
+
+      it('should be able to update company profiles to Moesif.', function(done) {
+        var moesifMiddleware = moesifExpress({ applicationId: TEST_API_SECRET_KEY });
+
+        moesifMiddleware.updateCompany({
+          companyId: 'testcompanyexpress3',
+          companyDomain: 'acmeinc.com',
+          metadata: { email: 'abc@email.com', name: 'abcdef', image: '123' }
+        },
+          function(error, response, context) {
+            expect(context.response.statusCode).to.equal(201);
+            if (error) done(error);
+            else done();
+          }
+        );
+      });
+
+      it('should be able to update company profiles in batch to Moesif.', function(done) {
+        var moesifMiddleware = moesifExpress({ applicationId: TEST_API_SECRET_KEY });
+
+        var companies = []
+
+        companies.push({
+          companyId: 'testcompanyexpress1',
+          companyDomain: 'nowhere.com',
+          metadata: { email: 'abc@email.com', name: 'abcdef', image: '123' }
+        })
+
+        companies.push({
+          companyId: 'testcompanyexpress3',
+          companyDomain: 'acmeinc.com',
+          metadata: { email: 'abc@email.com', name: 'abcdef', image: '123' }
+        })
+
+        moesifMiddleware.updateCompaniesBatch(companies,
+          function(error, response, context) {
+            expect(context.response.statusCode).to.equal(201);
+            if (error) done(error);
+            else done();
+          }
+        );
+      });
     });
   });
 }

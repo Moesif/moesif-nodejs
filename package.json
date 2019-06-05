@@ -1,6 +1,6 @@
 {
   "name": "moesif-express",
-  "version": "2.9.5",
+  "version": "2.9.6",
   "description": "Collection/Data Ingestion Middleware for Node.js",
   "main": "./lib/index.js",
   "keywords": [
