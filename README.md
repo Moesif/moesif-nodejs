@@ -364,6 +364,7 @@ A method is attached to the Moesif middleware object to update the company's pro
 var moesifMiddleware = moesifExpress(options);
 var company = {
   companyId: 'your company id',  // required.
+  companyDomain: 'acmeinc.com',
   metadata: {
     numEmployees: 9001
   }
