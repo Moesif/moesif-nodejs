@@ -22,21 +22,18 @@ if (RUN_TEST) {
 
       var options = {};
 
-      // function to identify user.
       options.identifyUser =
         options.identifyUser ||
         function() {
           return undefined;
         };
 
-      // function to identify company.
       options.identifyCompany =
       options.identifyCompany ||
       function() {
         return undefined;
       };
 
-      // LogBody option
       options.logBody = true;
 
       options.getMetadata =
