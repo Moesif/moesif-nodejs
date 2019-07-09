@@ -67,6 +67,7 @@ function loggerTestHelper(providedOptions, moesifOptions) {
     var moesifMiddleWareOptions = _.extend(
       {
         applicationId: TEST_API_SECRET_KEY,
+        logBody: true,
         callback: function(err, logData) {
           if (err) {
             reject(err);

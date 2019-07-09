@@ -22,12 +22,19 @@ if (RUN_TEST) {
 
       var options = {};
 
-      // function to identify user.
       options.identifyUser =
         options.identifyUser ||
         function() {
           return undefined;
         };
+
+      options.identifyCompany =
+      options.identifyCompany ||
+      function() {
+        return undefined;
+      };
+
+      options.logBody = true;
 
       options.getMetadata =
         options.getMetadata ||

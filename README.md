@@ -42,6 +42,8 @@ var options = {
 
   applicationId: 'Your Moesif Application Id',
 
+  logBody: true,
+
   identifyUser: function (req, res) {
     if (req.user) {
       return req.user.id;
@@ -81,7 +83,8 @@ var moesifExpress = require('moesif-express');
 const http = require('http');
 
 var options = {
-  applicationId: 'Your Application Id'
+  applicationId: 'Your Application Id',
+  logBody: true,
 };
 
 var server = http.createServer(function (req, res) {
@@ -105,6 +108,9 @@ server.listen(8080);
 
 ## Configuration options
 
+#### __`logBody`__
+Type: `Boolean`
+logBody is default to true, set to false to remove logging request and response body to Moesif.
 
 #### __`identifyUser`__
 

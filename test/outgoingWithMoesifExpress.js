@@ -23,6 +23,8 @@ if (RUN_TEST) {
           return undefined;
         };
 
+      options.logBody = true;
+
       options.getMetadata =
         options.getMetadata ||
         function(req, res) {
