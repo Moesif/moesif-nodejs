@@ -8,7 +8,7 @@
 [![Source Code][ico-source]][link-source]
 
 Node.js middleware to automatically capture _incoming_ or _outgoing_
-API requests/responses and send to Moesif for API debugging and analytics.
+API requests/responses and send to [Moesif](https://www.moesif.com) for API debugging and analytics.
 
 [Source Code on GitHub](https://github.com/moesif/moesif-express)
 
