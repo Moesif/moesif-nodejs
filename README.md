@@ -7,8 +7,8 @@
 [![Software License][ico-license]][link-license]
 [![Source Code][ico-source]][link-source]
 
-Node.js middleware to automatically capture _incoming_ or _outgoing_
-API requests/responses and send to [Moesif](https://www.moesif.com) for API debugging and analytics.
+Node.js SDK middleware that automatically logs _incoming_ or _outgoing_
+API calls and sends to [Moesif](https://www.moesif.com) for API analytics and log analysis.
 
 [Source Code on GitHub](https://github.com/moesif/moesif-express)
 
@@ -71,8 +71,13 @@ app.use(moesifMiddleware);
 
 ```
 
-### 2. Enter Moesif Application Id.
-You can find your Application Id from [_Moesif Dashboard_](https://www.moesif.com/) -> _Top Right Menu_ -> _App Setup_
+### 2. Enter Moesif Application Id
+Your Moesif Application Id can be found in the [_Moesif Portal_](https://www.moesif.com/).
+After signing up for a Moesif account, your Moesif Application Id will be displayed during the onboarding steps. 
+
+You can always find your Moesif Application Id at any time by logging 
+into the [_Moesif Portal_](https://www.moesif.com/), click on the top right menu,
+ and then clicking _Installation_.
 
 ## Not using Express?
 If you're not using the express framework, you can still use this library.
