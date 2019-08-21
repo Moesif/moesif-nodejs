@@ -248,7 +248,7 @@ options.maskContent = function(event) {
 ```json
 {
   "request": {
-    "time": "2016-09-09T04:45:42.914",
+    "time": "2019-08-08T04:45:42.914",
     "uri": "https://api.acmeinc.com/items/83738/reviews/",
     "verb": "POST",
     "api_version": "1.1.0",
@@ -277,7 +277,7 @@ options.maskContent = function(event) {
     }
   },
   "response": {
-    "time": "2016-09-09T04:45:42.914",
+    "time": "2019-08-08T04:45:42.924",
     "status": 500,
     "headers": {
       "Vary": "Accept-Encoding",
@@ -291,7 +291,8 @@ options.maskContent = function(event) {
       "Message": "Missing field location"
     }
   },
-  "user_id": "mndug437f43",
+  "user_id": "my_user_id",
+  "company_id": "my_company_id",
   "session_token":"end_user_session_token",
   "tags": "tag1, tag2"
 }
