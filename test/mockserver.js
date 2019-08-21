@@ -12,7 +12,7 @@ var expect = require('chai').expect;
 var _ = require('lodash');
 var moesifExpress = require('../lib');
 
-// replace with an moesif applicatin id token to test..
+// replace with an moesif application id token to test..
 var TEST_API_SECRET_KEY = '';
 var RUN_TEST = true;
 
@@ -304,9 +304,36 @@ if (RUN_TEST) {
 
         moesifMiddleware.updateUser(
           {
-            userId: 'testuserexpress3',
+            userId: '12345',
+            companyId: '67890',
             metadata: { email: 'abc@email.com', name: 'abcdef', image: '123' }
           },
+          function(error, response, context) {
+            expect(context.response.statusCode).to.equal(201);
+            if (error) done(error);
+            else done();
+          }
+        );
+      });
+
+      it('should be able to update user profiles in batch to Moesif.', function(done) {
+        var moesifMiddleware = moesifExpress({ applicationId: TEST_API_SECRET_KEY });
+
+        var users = []
+
+        users.push({
+          userId: '12345',
+          companyId: '67890',
+          metadata: { email: 'abc@email.com', name: 'abcdef', image: '123' }
+        })
+
+        users.push({
+          userId: '1234',
+          companyId: '6789',
+          metadata: { email: 'abc@email.com', name: 'abcdef', image: '123' }
+        })
+
+        moesifMiddleware.updateUsersBatch(users,
           function(error, response, context) {
             expect(context.response.statusCode).to.equal(201);
             if (error) done(error);
@@ -319,7 +346,7 @@ if (RUN_TEST) {
         var moesifMiddleware = moesifExpress({ applicationId: TEST_API_SECRET_KEY });
 
         moesifMiddleware.updateCompany({
-          companyId: 'testcompanyexpress3',
+          companyId: '12345',
           companyDomain: 'acmeinc.com',
           metadata: { email: 'abc@email.com', name: 'abcdef', image: '123' }
         },
@@ -337,13 +364,13 @@ if (RUN_TEST) {
         var companies = []
 
         companies.push({
-          companyId: 'testcompanyexpress1',
+          companyId: '12345',
           companyDomain: 'nowhere.com',
           metadata: { email: 'abc@email.com', name: 'abcdef', image: '123' }
         })
 
         companies.push({
-          companyId: 'testcompanyexpress3',
+          companyId: '1234',
           companyDomain: 'acmeinc.com',
           metadata: { email: 'abc@email.com', name: 'abcdef', image: '123' }
         })

@@ -8,16 +8,6 @@ var RUN_TEST = true;
 if (RUN_TEST) {
   describe('unit test for batcher module', function() {
     this.timeout(10000);
-    // before(function() {
-    //   var logger = function(str) {
-    //     console.log('[logger]: ' + str);
-    //   };
-    //   var recorder = function(logData) {
-    //     console.log('recorder is called');
-    //     console.log(JSON.stringify(logData, null, '  '));
-    //   };
-    //   patch(recorder, logger);
-    // });
 
     it('simple batch triggered by size', function(done) {
       var batcher = creatBatcher(function(dataArray) {
