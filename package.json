@@ -30,7 +30,7 @@
     "debug": "^3.1.0",
     "http-errors": "^1.7.1",
     "iconv-lite": "^0.4.24",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "moesifapi": "^2.0.2",
     "raw-body": "^2.3.3",
     "request-ip": "^2.1.3",
