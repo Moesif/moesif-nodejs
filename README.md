@@ -161,26 +161,6 @@ options.getSessionToken = function (req, res) {
 }
 ```
 
-#### __`getTags`__
-
-__Will be deprecated. Please use getMetadata instead to provide metadata for events.__
-
-Type: `(Request, Response) => String`
-getTags is a function that takes a express `req` and `res` arguments and returns a comma-separated string containing a list of tags.
-See Moesif documentation for full list of tags.
-
-
-
-```javascript
-options.getTags = function (req, res) {
-  // your code here. must return a comma-separated string.
-  if (req.path.startsWith('/users') && req.method == 'GET'){
-    return 'user'
-  }
-  return 'random_tag_1, random_tag2'
-}
-```
-
 #### __`getApiVersion`__
 
 Type: `(Request, Response) => String`
@@ -302,21 +282,29 @@ options.maskContent = function(event) {
 For more documentation regarding what fields and meaning,
 see below or the [Moesif Node API Documentation](https://www.moesif.com/docs/api?javascript).
 
-Fields | Required | Description
+Name | Required | Description
 --------- | -------- | -----------
-request.time | Required | Timestamp for the request in ISO 8601 format
-request.uri | Required | Full uri such as https://api.com/?query=string including host, query string, etc
-request.verb | Required | HTTP method used, i.e. `GET`, `POST`
-request.api_version | Optional | API Version you want to tag this request with
-request.ip_address | Optional | IP address of the end user
-request.headers | Required | Headers of the  request
-request.body | Optional | Body of the request in JSON format
+request | __true__ | The object that specifies the request message
+request.time| __true__ | Timestamp for the request in ISO 8601 format
+request.uri| __true__ | Full uri such as _https://api.com/?query=string_ including host, query string, etc
+request.verb| __true__ | HTTP method used, i.e. `GET`, `POST`
+request.api_version| false | API Version you want to tag this request with such as _1.0.0_
+request.ip_address| false | IP address of the requester, If not set, we use the IP address of your logging API calls.
+request.headers| __true__ | Headers of the  request as a `Map<string, string>`. Multiple headers with the same key name should be combined together such that the values are joined by a comma. [HTTP Header Protocol on w3.org](https://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2)
+request.body| false | Body of the request in JSON format or Base64 encoded binary data (see _transfer_encoding_)
+request.transfer_encoding| false | A string that specifies the transfer encoding of Body being sent to Moesif. If field nonexistent, body assumed to be JSON or text. Only possible value is _base64_ for sending binary data like protobuf
 ||
-response.time | Required | Timestamp for the response in ISO 8601 format
-response.status | Required | HTTP status code such as 200 or 500
-response.ip_address | Optional | IP address of the responding server
-response.headers | Required | Headers of the response
-response.body | Required | Body of the response in JSON format
+response | false | The object that specifies the response message, not set implies no response received such as a timeout.
+response.time| __true__ | Timestamp for the response in ISO 8601 format
+response.status| __true__ | HTTP status code as number such as _200_ or _500_
+response.ip_address| false | IP address of the responding server
+response.headers| __true__ | Headers of the response as a `Map<string, string>`. Multiple headers with the same key name should be combined together such that the values are joined by a comma. [HTTP Header Protocol on w3.org](https://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2)
+response.body| false | Body of the response in JSON format or Base64 encoded binary data (see _transfer_encoding_)
+response.transfer_encoding| false | A string that specifies the transfer encoding of Body being sent to Moesif. If field nonexistent, body assumed to be JSON or text. Only possible value is _base64_ for sending binary data like protobuf
+||
+session_token | _Recommend_ | The end user session token such as a JWT or API key, which may or may not be temporary. Moesif will auto-detect the session token automatically if not set.
+user_id | _Recommend_ | Identifies this API call to a permanent user_id
+metadata | false | A JSON Object consisting of any custom metadata to be stored with this event.
 
 #### __`noAutoHideSensitive`__
 
