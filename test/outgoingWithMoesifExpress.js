@@ -14,7 +14,7 @@ if (RUN_TEST) {
     before(function() {
       var options = {
         debug: false,
-        applicationId:''
+        applicationId:'Your Moesif Application Id'
       };
       // function to identify user.
       options.identifyUser =
