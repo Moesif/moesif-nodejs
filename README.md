@@ -347,6 +347,10 @@ var user = {
   metadata: {
     email: 'user@email.com',
     name: 'George'
+  },
+  campaign: {
+    utmSource: 'Newsletter',
+    utmMedium: 'Email'
   }
 }
 
@@ -367,6 +371,10 @@ var company = {
   companyDomain: 'acmeinc.com',
   metadata: {
     numEmployees: 9001
+  },
+  campaign: {
+    utmSource: 'Adwords',
+    utmMedium: 'Twitter'
   }
 }
 

@@ -13,7 +13,7 @@ var _ = require('lodash');
 var moesifExpress = require('../lib');
 
 // replace with an moesif application id token to test..
-var TEST_API_SECRET_KEY = '';
+var TEST_API_SECRET_KEY = 'Your Moesif Application Id';
 var RUN_TEST = true;
 
 function mockReq(reqMock) {
@@ -306,7 +306,8 @@ if (RUN_TEST) {
           {
             userId: '12345',
             companyId: '67890',
-            metadata: { email: 'abc@email.com', name: 'abcdef', image: '123' }
+            metadata: { email: 'abc@email.com', name: 'abcdef', image: '123' },
+            campaign: { utmSource: 'Newsletter', utmMedium: 'Email'}
           },
           function(error, response, context) {
             expect(context.response.statusCode).to.equal(201);
@@ -348,7 +349,8 @@ if (RUN_TEST) {
         moesifMiddleware.updateCompany({
           companyId: '12345',
           companyDomain: 'acmeinc.com',
-          metadata: { email: 'abc@email.com', name: 'abcdef', image: '123' }
+          metadata: { email: 'abc@email.com', name: 'abcdef', image: '123' },
+          campaign: { utmSource: 'Adwords', utmMedium: 'Twitter'}
         },
           function(error, response, context) {
             expect(context.response.statusCode).to.equal(201);
