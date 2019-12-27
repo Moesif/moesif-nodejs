@@ -281,7 +281,7 @@ options.maskContent = function(event) {
 
 #### __`debug`__
 Type: `Boolean`
-Set to true to print debug logs if you're having integegration issues.
+Set to true to print debug logs if you're having integration issues.
 
 For more documentation regarding what fields and meaning,
 see below or the [Moesif Node API Documentation](https://www.moesif.com/docs/api?javascript).
