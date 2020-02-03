@@ -445,7 +445,7 @@ var user = {
 
 var users = [user]
 
-moesifMiddleware.updateUser(users, callback);
+moesifMiddleware.updateUsersBatch(users, callback);
 ```
 
 ## Update a Single Company
@@ -526,7 +526,7 @@ var company = {
 
 var companies = [company]
 
-moesifMiddleware.updateCompany(companies, callback);
+moesifMiddleware.updateCompaniesBatch(companies, callback);
 ```
 
 ## Examples
