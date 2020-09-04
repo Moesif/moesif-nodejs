@@ -2,7 +2,7 @@
 var http = require('http');
 var https = require('https');
 var patch = require('../lib/outgoing');
-var moesifExpress = require('../lib');
+var moesif = require('../lib');
 var _ = require('lodash');
 
 var RUN_TEST = true;
@@ -60,7 +60,7 @@ if (RUN_TEST) {
           return false;
         };
 
-      var middleware = moesifExpress(options);
+      var middleware = moesif(options);
       middleware.startCaptureOutgoing();
     });
 

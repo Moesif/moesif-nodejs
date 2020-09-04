@@ -1,6 +1,6 @@
 # Moesif Node.js Middleware
 
-[![NPM](https://nodei.co/npm/moesif-express.png?compact=true&stars=true)](https://nodei.co/npm/moesif-express/)
+[![NPM](https://nodei.co/npm/moesif-nodejs.png?compact=true&stars=true)](https://nodei.co/npm/moesif-nodejs/)
 
 [![Built For][ico-built-for]][link-built-for]
 [![Total Downloads][ico-downloads]][link-downloads]
@@ -8,19 +8,19 @@
 [![Source Code][ico-source]][link-source]
 
 Node.js SDK middleware that automatically logs _incoming_ or _outgoing_
-API calls and sends to [Moesif](https://www.moesif.com) for API analytics and log analysis.
+API calls and sends to [Moesif](https://www.moesif.com) for API analytics and monitoring.
 
-[Source Code on GitHub](https://github.com/moesif/moesif-express)
+[Source Code on GitHub](https://github.com/moesif/moesif-nodejs)
 
 ## Notes
-- The SDK is called `moesif-express` for historical reasons but compatible with any Node.js app regardless if Express Framework is used.
+- Previously, this NPM package was called `moesif-express` and has been renamed to `moesif-nodejs` in 3.0 to reflect support for any Node.js app.
 - The library can capture both _incoming_ and _outgoing_ API Calls depending on how you configure the SDK (See examples).
 - To ensure req body is captured, if you use a body parser middleware like `body-parser`, apply Moesif middleware _after_ it.
 
 ## How to install
 
 ```shell
-npm install --save moesif-express
+npm install --save moesif-nodejs
 ```
 
 ## How to use
@@ -35,7 +35,7 @@ The following shows how import the controllers and use:
 // 1. Import Modules
 var express = require('express');
 var app = express();
-var moesifExpress = require('moesif-express');
+var moesif = require('moesif-nodejs');
 
 // 2. Set the options, the only required field is applicationId.
 var options = {
@@ -57,7 +57,7 @@ var options = {
 };
 
 // 3. Initialize the middleware object with options
-var moesifMiddleware = moesifExpress(options);
+var moesifMiddleware = moesif(options);
 
 
 // 4a. Start capturing outgoing API Calls to 3rd parties like Stripe
@@ -84,7 +84,7 @@ If you're not using the express framework, you can still use this library.
 The library does not depend on express, so you can still call the middleware from a basic HTTP server.
 
 ```javascript
-var moesifExpress = require('moesif-express');
+var moesif = require('moesif-nodejs');
 const http = require('http');
 
 var options = {
@@ -93,7 +93,7 @@ var options = {
 };
 
 var server = http.createServer(function (req, res) {
-  moesifExpress(options)(req, res, function () {
+  moesif(options)(req, res, function () {
     // Callback
   });
 
@@ -344,7 +344,7 @@ If you want to capture all outgoing API calls from your Node.js app to third par
 Stripe or to your own dependencies, call `startCaptureOutgoing()` to start capturing.
 
 ```javascript
-var moesifMiddleware = moesifExpress(options);
+var moesifMiddleware = moesif(options);
 moesifMiddleware.startCaptureOutgoing();
 ```
 
@@ -375,7 +375,7 @@ This method is a convenient helper that calls the Moesif API lib.
 For details, visit the [Node.js API Reference](https://www.moesif.com/docs/api?javascript--nodejs#update-a-user).
 
 ```javascript
-var moesifMiddleware = moesifExpress(options);
+var moesifMiddleware = moesif(options);
 
 // Only userId is required.
 // Campaign object is optional, but useful if you want to track ROI of acquisition channels
@@ -414,7 +414,7 @@ This method is a convenient helper that calls the Moesif API lib.
 For details, visit the [Node.js API Reference](https://www.moesif.com/docs/api?javascript--nodejs#update-users-in-batch).
 
 ```javascript
-var moesifMiddleware = moesifExpress(options);
+var moesifMiddleware = moesif(options);
 
 // Only userId is required.
 // Campaign object is optional, but useful if you want to track ROI of acquisition channels
@@ -458,7 +458,7 @@ For details, visit the [Node.js API Reference](https://www.moesif.com/docs/api?j
 
 
 ```javascript
-var moesifMiddleware = moesifExpress(options);
+var moesifMiddleware = moesif(options);
 
 // Only companyId is required.
 // Campaign object is optional, but useful if you want to track ROI of acquisition channels
@@ -496,7 +496,7 @@ This method is a convenient helper that calls the Moesif API lib.
 For details, visit the [Node.js API Reference](https://www.moesif.com/docs/api?javascript--nodejs#update-companies-in-batch).
 
 ```javascript
-var moesifMiddleware = moesifExpress(options);
+var moesifMiddleware = moesif(options);
 
 // Only companyId is required.
 // Campaign object is optional, but useful if you want to track ROI of acquisition channels
@@ -531,7 +531,7 @@ moesifMiddleware.updateCompaniesBatch(companies, callback);
 
 ## Examples
 
-- [A complete example is available on GitHub](https://github.com/Moesif/moesif-express-example).
+- [A complete example is available on GitHub](https://github.com/Moesif/moesif-nodejs-example).
 
 - [An example of integration with Apollo.js with support for GraphQL.](https://github.com/Moesif/moesif-apollo-graphql-example)
 
@@ -541,11 +541,11 @@ To view more documentation on integration options, please visit __[the Integrati
 
 
 [ico-built-for]: https://img.shields.io/badge/built%20for-node.js-blue.svg
-[ico-downloads]: https://img.shields.io/npm/dt/moesif-express.svg
+[ico-downloads]: https://img.shields.io/npm/dt/moesif-nodejs.svg
 [ico-license]: https://img.shields.io/badge/License-Apache%202.0-green.svg
-[ico-source]: https://img.shields.io/github/last-commit/moesif/moesif-express.svg?style=social
+[ico-source]: https://img.shields.io/github/last-commit/moesif/moesif-nodejs.svg?style=social
 
 [link-built-for]: https://expressjs.com/
-[link-downloads]: https://www.npmjs.com/package/moesif-express
-[link-license]: https://raw.githubusercontent.com/Moesif/moesif-express/master/LICENSE
-[link-source]: https://github.com/moesif/moesif-express
+[link-downloads]: https://www.npmjs.com/package/moesif-nodejs
+[link-license]: https://raw.githubusercontent.com/Moesif/moesif-nodejs/master/LICENSE
+[link-source]: https://github.com/moesif/moesif-nodejs

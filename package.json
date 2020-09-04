@@ -1,7 +1,7 @@
 {
-  "name": "moesif-express",
-  "version": "2.9.19",
-  "description": "Collection/Data Ingestion Middleware for Node.js",
+  "name": "moesif-nodejs",
+  "version": "3.0.0",
+  "description": "Monitoring agent to log API calls to Moesif for deep API analytics",
   "main": "lib/index.js",
   "keywords": [
     "moesif",
@@ -19,7 +19,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Moesif/moesif-express"
+    "url": "https://github.com/Moesif/moesif-nodejs"
   },
   "dependencies": {
     "bytes": "^3.1.0",

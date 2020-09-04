@@ -6,11 +6,11 @@
 var express = require('express');
 var app = express();
 
-var moesifExpress = require('./lib');
+var moesif = require('./lib');
 
 var TEST_API_SECRET_KEY = 'eyJhcHAiOiI5NDo5MiIsInZlciI6IjIuMCIsIm9yZyI6IjExNjoxMDQiLCJpYXQiOjE1NTIwMDMyMDB9.mtudzMSLcpfq0iTle-qTJLMJqBYirHqwrKG-Rz9oOaM';
 
-var moesifMiddleWare = moesifExpress({applicationId: TEST_API_SECRET_KEY});
+var moesifMiddleWare = moesif({applicationId: TEST_API_SECRET_KEY});
 
 app.use(moesifMiddleWare);
 
