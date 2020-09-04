@@ -531,9 +531,8 @@ moesifMiddleware.updateCompaniesBatch(companies, callback);
 
 ## Examples
 
-- [A complete example is available on GitHub](https://github.com/Moesif/moesif-nodejs-example).
-
-- [An example of integration with Apollo.js with support for GraphQL.](https://github.com/Moesif/moesif-apollo-graphql-example)
+- [View example app with Express](https://github.com/Moesif/moesif-express-example).
+- [View example app with Apollo.js GraphQL.](https://github.com/Moesif/moesif-apollo-graphql-example)
 
 ## Other integrations
 
