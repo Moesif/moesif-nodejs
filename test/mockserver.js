@@ -10,7 +10,7 @@ var Promise = require('promise/lib/es6-extensions');
 var should = require('should');
 var expect = require('chai').expect;
 var _ = require('lodash');
-var moesifExpress = require('../lib');
+var moesif = require('../lib');
 
 // replace with an moesif application id token to test..
 var TEST_API_SECRET_KEY = 'Your Moesif Application Id';
@@ -79,7 +79,7 @@ function loggerTestHelper(providedOptions, moesifOptions) {
       moesifOptions
     );
 
-    var middleware = moesifExpress(moesifMiddleWareOptions);
+    var middleware = moesif(moesifMiddleWareOptions);
 
     middleware(req, res, function(_req, _res, next) {
       options.next(req, res, next);
@@ -89,17 +89,17 @@ function loggerTestHelper(providedOptions, moesifOptions) {
 }
 
 if (RUN_TEST) {
-  describe('moesif-express', function() {
+  describe('moesif-nodejs', function() {
     describe('fail cases', function() {
       it('throw an error when not provided an application id.', function() {
         expect(function() {
-          moesifExpress({});
+          moesif({});
         }).to.throw(Error);
       });
 
       it('throw an error when identifyUser is not a function', function() {
         expect(function() {
-          moesifExpress({
+          moesif({
             applicationId: TEST_API_SECRET_KEY,
             identifyUser: 'abc'
           });
@@ -111,7 +111,7 @@ if (RUN_TEST) {
       this.timeout(3000);
 
       it('middleware should be function that takes 3 arguments', function() {
-        expect(moesifExpress({ applicationId: TEST_API_SECRET_KEY }).length).to.equal(3);
+        expect(moesif({ applicationId: TEST_API_SECRET_KEY }).length).to.equal(3);
       });
 
       it('test one successful submission without body', function(done) {
@@ -300,7 +300,7 @@ if (RUN_TEST) {
       });
 
       it('should be able to update user profile to Moesif.', function(done) {
-        var moesifMiddleware = moesifExpress({ applicationId: TEST_API_SECRET_KEY });
+        var moesifMiddleware = moesif({ applicationId: TEST_API_SECRET_KEY });
 
         moesifMiddleware.updateUser(
           {
@@ -318,7 +318,7 @@ if (RUN_TEST) {
       });
 
       it('should be able to update user profiles in batch to Moesif.', function(done) {
-        var moesifMiddleware = moesifExpress({ applicationId: TEST_API_SECRET_KEY });
+        var moesifMiddleware = moesif({ applicationId: TEST_API_SECRET_KEY });
 
         var users = []
 
@@ -344,7 +344,7 @@ if (RUN_TEST) {
       });
 
       it('should be able to update company profiles to Moesif.', function(done) {
-        var moesifMiddleware = moesifExpress({ applicationId: TEST_API_SECRET_KEY });
+        var moesifMiddleware = moesif({ applicationId: TEST_API_SECRET_KEY });
 
         moesifMiddleware.updateCompany({
           companyId: '12345',
@@ -361,7 +361,7 @@ if (RUN_TEST) {
       });
 
       it('should be able to update company profiles in batch to Moesif.', function(done) {
-        var moesifMiddleware = moesifExpress({ applicationId: TEST_API_SECRET_KEY });
+        var moesifMiddleware = moesif({ applicationId: TEST_API_SECRET_KEY });
 
         var companies = []
 
