@@ -526,6 +526,7 @@ var companies = [company]
 moesifMiddleware.updateCompaniesBatch(companies, callback);
 ```
 
+## Koa Support
 
 The Moesif option handles take a Node.js req and res as arguments. You can also access the Koa state object via `req.state`. 
 As an example, many Koa auth middleware save the authenticated user on `ctx.state.user`, so you can access via Moesif options like identifyUser:
