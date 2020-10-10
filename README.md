@@ -7,8 +7,8 @@
 [![Software License][ico-license]][link-license]
 [![Source Code][ico-source]][link-source]
 
-Node.js SDK middleware that automatically logs _incoming_ or _outgoing_
-API calls and sends to [Moesif](https://www.moesif.com) for API analytics and monitoring.
+Node.js SDK middleware that automatically logs _incoming_ or _outgoing_ API calls and sends to [Moesif](https://www.moesif.com) for API analytics and monitoring.
+This SDK supports any Node.js framework including Express, Koa, Nest.js, etc.
 
 [Source Code on GitHub](https://github.com/moesif/moesif-nodejs)
 
@@ -25,10 +25,9 @@ npm install --save moesif-nodejs
 
 ## How to use
 
-The following shows how import the controllers and use:
+The following shows how import Moesif for an example app using Express
 
 ### 1. Import the module:
-
 
 ```javascript
 
@@ -79,10 +78,6 @@ You can always find your Moesif Application Id at any time by logging
 into the [_Moesif Portal_](https://www.moesif.com/), click on the top right menu,
  and then clicking _Installation_.
 
-## Not using Express?
-If you're not using the express framework, you can still use this library.
-The library does not depend on express, so you can still call the middleware from a basic HTTP server.
-
 ```javascript
 var moesif = require('moesif-nodejs');
 const http = require('http');
@@ -112,6 +107,8 @@ server.listen(8080);
 ```
 
 ## Configuration options
+
+__If you're using Koa framework, you can access the state object via `request.state`__
 
 #### __`logBody`__
 Type: `Boolean`
@@ -529,10 +526,26 @@ var companies = [company]
 moesifMiddleware.updateCompaniesBatch(companies, callback);
 ```
 
+## Koa Support
+
+The Moesif option handles take a Node.js req and res as arguments. You can also access the Koa state object via `req.state`. 
+As an example, many Koa auth middleware save the authenticated user on `ctx.state.user`, so you can access via Moesif options like identifyUser:
+
+```javascript
+  identifyUser: function (req, res) {
+    if (req.state && req.state.user) {
+      return req.state.user.sub;
+    }
+    return undefined;
+  },
+```
+
 ## Examples
 
 - [View example app with Express](https://github.com/Moesif/moesif-express-example).
+- [View example app with Koa](https://github.com/Moesif/moesif-koa-example).
 - [View example app with Apollo.js GraphQL.](https://github.com/Moesif/moesif-apollo-graphql-example)
+- [View example app with Express GraphQL.](https://github.com/Moesif/moesif-express-graphql-example)
 
 ## Other integrations
 
