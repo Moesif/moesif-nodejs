@@ -1,15 +1,22 @@
 {
   "name": "moesif-nodejs",
-  "version": "3.1.2",
+  "version": "3.1.3",
   "description": "Monitoring agent to log API calls to Moesif for deep API analytics",
   "main": "lib/index.js",
   "keywords": [
     "moesif",
     "api",
+    "gateway",
+    "express",
+    "api",
     "express",
     "debug",
     "logging",
-    "trace"
+    "monitoring",
+    "trace",
+    "analytics",
+    "graphql",
+    "rpc"
   ],
   "author": {
     "name": "Xing Wang",
