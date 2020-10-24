@@ -8,7 +8,7 @@ var app = express();
 
 var moesif = require('./lib');
 
-var TEST_API_SECRET_KEY = 'eyJhcHAiOiI5NDo5MiIsInZlciI6IjIuMCIsIm9yZyI6IjExNjoxMDQiLCJpYXQiOjE1NTIwMDMyMDB9.mtudzMSLcpfq0iTle-qTJLMJqBYirHqwrKG-Rz9oOaM';
+var TEST_APPLICATION_ID = 'Your Moesif Application ID';
 
 var moesifMiddleWare = moesif({applicationId: TEST_API_SECRET_KEY});
 
