@@ -70,6 +70,8 @@ app.use(moesifMiddleware);
 
 ```
 
+If you are using babel or newer versions of nodejs, you can using more modern syntax for importing: eg: `import moesif from 'moesif-express';`
+
 ### 2. Enter Moesif Application Id
 Your Moesif Application Id can be found in the [_Moesif Portal_](https://www.moesif.com/).
 After signing up for a Moesif account, your Moesif Application Id will be displayed during the onboarding steps. 
