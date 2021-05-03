@@ -74,9 +74,9 @@ If you are using babel or newer versions of nodejs, you can using more modern sy
 
 ### 2. Enter Moesif Application Id
 Your Moesif Application Id can be found in the [_Moesif Portal_](https://www.moesif.com/).
-After signing up for a Moesif account, your Moesif Application Id will be displayed during the onboarding steps. 
+After signing up for a Moesif account, your Moesif Application Id will be displayed during the onboarding steps.
 
-You can always find your Moesif Application Id at any time by logging 
+You can always find your Moesif Application Id at any time by logging
 into the [_Moesif Portal_](https://www.moesif.com/), click on the top right menu,
  and then clicking _Installation_.
 
@@ -135,10 +135,10 @@ options.identifyUser = function (req, res) {
 
 Type: `(Request, Response) => String`
 identifyCompany is a function that takes express `req` and `res` as arguments
-and returns a `companyId`. If your business is B2B, this enables Moesif to attribute 
-API requests to specific companies or organizations so you can understand which accounts are 
-calling your API. This can be used simultaneously with `identifyUser` to track both 
-individual customers and the companies their a part of. 
+and returns a `companyId`. If your business is B2B, this enables Moesif to attribute
+API requests to specific companies or organizations so you can understand which accounts are
+calling your API. This can be used simultaneously with `identifyUser` to track both
+individual customers and the companies their a part of.
 
 ```javascript
 options.identifyCompany = function (req, res) {
@@ -337,6 +337,11 @@ Default 25. If batching is not disabled, this is the batchSize of API events tha
 Type: number in milliseconds
 Default 2000. If batching is not disabled, this is the maximum wait time (approximately) before triggering flushing of the queue and sending to Moesif. If set, it must be greater than 500 (milliseconds).
 
+#### __`retry`__
+
+Type: number of time to retry if fails to post to Moesif.
+Default undefined. If set, must be a number between 1 to 3.
+
 ## Capture Outgoing
 
 If you want to capture all outgoing API calls from your Node.js app to third parties like
@@ -385,7 +390,7 @@ var user = {
   companyId: '67890', // If set, associate user with a company object
   campaign: {
     utmSource: 'google',
-    utmMedium: 'cpc', 
+    utmMedium: 'cpc',
     utmCampaign: 'adwords',
     utmTerm: 'api+tooling',
     utmContent: 'landing'
@@ -407,7 +412,7 @@ moesifMiddleware.updateUser(user, callback);
 ```
 
 ## Update Users in Batch
-Similar to updateUser, but used to update a list of users in one batch. 
+Similar to updateUser, but used to update a list of users in one batch.
 Only the `userId` field is required.
 This method is a convenient helper that calls the Moesif API lib.
 For details, visit the [Node.js API Reference](https://www.moesif.com/docs/api?javascript--nodejs#update-users-in-batch).
@@ -424,7 +429,7 @@ var user = {
   companyId: '67890', // If set, associate user with a company object
   campaign: {
     utmSource: 'google',
-    utmMedium: 'cpc', 
+    utmMedium: 'cpc',
     utmCampaign: 'adwords',
     utmTerm: 'api+tooling',
     utmContent: 'landing'
@@ -465,10 +470,10 @@ var moesifMiddleware = moesif(options);
 // metadata can be any custom object
 var company = {
   companyId: '67890',
-  companyDomain: 'acmeinc.com', // If domain is set, Moesif will enrich your profiles with publicly available info 
-  campaign: { 
+  companyDomain: 'acmeinc.com', // If domain is set, Moesif will enrich your profiles with publicly available info
+  campaign: {
     utmSource: 'google',
-    utmMedium: 'cpc', 
+    utmMedium: 'cpc',
     utmCampaign: 'adwords',
     utmTerm: 'api+tooling',
     utmContent: 'landing'
@@ -489,7 +494,7 @@ moesifMiddleware.updateCompany(company, callback);
 ```
 
 ## Update Companies in Batch
-Similar to updateCompany, but used to update a list of companies in one batch. 
+Similar to updateCompany, but used to update a list of companies in one batch.
 Only the `companyId` field is required.
 This method is a convenient helper that calls the Moesif API lib.
 For details, visit the [Node.js API Reference](https://www.moesif.com/docs/api?javascript--nodejs#update-companies-in-batch).
@@ -503,10 +508,10 @@ var moesifMiddleware = moesif(options);
 // metadata can be any custom object
 var company = {
   companyId: '67890',
-  companyDomain: 'acmeinc.com', // If domain is set, Moesif will enrich your profiles with publicly available info 
-  campaign: { 
+  companyDomain: 'acmeinc.com', // If domain is set, Moesif will enrich your profiles with publicly available info
+  campaign: {
     utmSource: 'google',
-    utmMedium: 'cpc', 
+    utmMedium: 'cpc',
     utmCampaign: 'adwords',
     utmTerm: 'api+tooling',
     utmContent: 'landing'
@@ -530,7 +535,7 @@ moesifMiddleware.updateCompaniesBatch(companies, callback);
 
 ## Koa Support
 
-The Moesif option handles take a Node.js req and res as arguments. You can also access the Koa state object via `req.state`. 
+The Moesif option handles take a Node.js req and res as arguments. You can also access the Koa state object via `req.state`.
 As an example, many Koa auth middleware save the authenticated user on `ctx.state.user`, so you can access via Moesif options like identifyUser:
 
 ```javascript
