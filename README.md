@@ -340,7 +340,7 @@ Default 2000. If batching is not disabled, this is the maximum wait time (approx
 #### __`retry`__
 
 Type: number of time to retry if fails to post to Moesif.
-Default undefined. If set, must be a number between 1 to 3.
+If set, must be a number between 0 to 3.
 
 ## Capture Outgoing
 
