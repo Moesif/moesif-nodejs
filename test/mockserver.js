@@ -9,7 +9,7 @@ var mocks = require('node-mocks-http');
 var Promise = require('promise/lib/es6-extensions');
 var should = require('should');
 var expect = require('chai').expect;
-var _ = require('lodash');
+var extend = require('lodash/extend');
 var moesif = require('../lib');
 
 // replace with an moesif application id token to test..
@@ -17,7 +17,7 @@ var TEST_API_SECRET_KEY = 'Your Moesif Application Id';
 var RUN_TEST = true;
 
 function mockReq(reqMock) {
-  var reqSpec = _.extend(
+  var reqSpec = extend(
     {
       method: 'GET',
       url: '/hello',
@@ -47,7 +47,7 @@ function mockRes() {
 }
 
 function loggerTestHelper(providedOptions, moesifOptions) {
-  var options = _.extend(
+  var options = extend(
     {
       loggerOptions: null,
       req: null,
@@ -61,10 +61,10 @@ function loggerTestHelper(providedOptions, moesifOptions) {
 
   var req = mockReq(options.req);
   // console.log('mocked req ' + JSON.stringify(req));
-  var res = _.extend(mockRes(), options.res);
+  var res = extend(mockRes(), options.res);
 
   return new Promise(function(resolve, reject) {
-    var moesifMiddleWareOptions = _.extend(
+    var moesifMiddleWareOptions = extend(
       {
         applicationId: TEST_API_SECRET_KEY,
         logBody: true,
@@ -213,7 +213,7 @@ if (RUN_TEST) {
         var testMoesifOptions = {
           applicationId: TEST_API_SECRET_KEY,
           maskContent: function(_logData) {
-            var maskedLogData = _.extend({}, _logData);
+            var maskedLogData = extend({}, _logData);
             maskedLogData.request.headers.header1 = undefined;
             return maskedLogData;
           }
@@ -284,7 +284,7 @@ if (RUN_TEST) {
         var testMoesifOptions = {
           applicationId: TEST_API_SECRET_KEY,
           maskContent: function(_logData) {
-            var maskedLogData = _.extend({}, _logData);
+            var maskedLogData = extend({}, _logData);
             maskedLogData.request.headers.header1 = undefined;
             return maskedLogData;
           }
