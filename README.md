@@ -342,6 +342,16 @@ Default 2000. If batching is not disabled, this is the maximum wait time (approx
 Type: number of time to retry if fails to post to Moesif.
 If set, must be a number between 0 to 3.
 
+#### __`requestMaxBodySizeLimit`__
+
+Type: number
+Default 100000. Maximum request body size in bytes to log when sending the data to Moesif.
+
+#### __`responseMaxBodySizeLimit`__
+
+Type: number
+Default 100000. Maximum response body size in bytes to log when sending the data to Moesif.
+
 ## Capture Outgoing
 
 If you want to capture all outgoing API calls from your Node.js app to third parties like
