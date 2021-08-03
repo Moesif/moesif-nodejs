@@ -3,7 +3,7 @@ var http = require('http');
 var https = require('https');
 var moesifapi = require('moesifapi');
 var patch = require('../lib/outgoing');
-var createRecorder = require('../lib/outgoingRecorder');
+var createOutgoingRecorder = require('../lib/outgoingRecorder');
 
 var RUN_TEST = true;
 
@@ -93,7 +93,7 @@ if (RUN_TEST) {
         });
       };
 
-      var recorder = createRecorder(trySaveEventLocal, options, logger);
+      var recorder = createOutGoingRecorder(trySaveEventLocal, options, logger);
 
       var unpatch = patch(recorder, logger);
       console.log('patched successfully, return value of patch is');
