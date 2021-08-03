@@ -342,12 +342,12 @@ Default 2000. If batching is not disabled, this is the maximum wait time (approx
 Type: number of time to retry if fails to post to Moesif.
 If set, must be a number between 0 to 3.
 
-#### __`requestMaxBodySizeLimit`__
+#### __`requestMaxBodySize`__
 
 Type: number
 Default 100000. Maximum request body size in bytes to log when sending the data to Moesif.
 
-#### __`responseMaxBodySizeLimit`__
+#### __`responseMaxBodySize`__
 
 Type: number
 Default 100000. Maximum response body size in bytes to log when sending the data to Moesif.
