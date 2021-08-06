@@ -4,7 +4,7 @@ var https = require('https');
 var patch = require('../lib/outgoing');
 var moesif = require('../lib');
 
-var RUN_TEST = true;
+var RUN_TEST = false;
 
 if (RUN_TEST) {
   describe('test capture using actual moesif express attached api', function() {

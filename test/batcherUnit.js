@@ -3,7 +3,7 @@ var assert = require('assert');
 var creatBatcher = require('../lib/batcher');
 
 
-var RUN_TEST = true;
+var RUN_TEST = false;
 
 if (RUN_TEST) {
   describe('unit test for batcher module', function() {
