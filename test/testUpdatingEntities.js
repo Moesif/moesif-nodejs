@@ -13,14 +13,14 @@ if (RUN_TEST) {
     this.timeout(10000);
 
     var middleWare = moesif({
-      applicationId: "test application id",
+      applicationId: "Test",
       debug: true
       // debug: 'instrumentation',
     });
 
     it("verify toJSON converts camelCase to snake_case for Company predefined fields", function () {
       const camelCasedCompany = {
-        companyId: "helloThere",
+        companyId: "randomId" + Math.random(),
         ipAddress: "199.2.232.2",
         companyDomain: "hello.com"
       };
@@ -33,10 +33,30 @@ if (RUN_TEST) {
       console.log(JSON.stringify(companyModel));
     }); // end of it
 
+
+    it("update single company", function (done) {
+      const singleCamelCasedCompany = {
+        companyId: "randomId" + Math.random(),
+        ipAddress: "199.2.232.2",
+        companyDomain: "hello.com"
+      };
+
+      middleWare.updateCompany(
+        singleCamelCasedCompany,
+        function (err, success) {
+          if (err) {
+            console.log(err);
+          } else {
+          }
+          done();
+        }
+      );
+    }); // end of it
+
     it("test update company batch", function (done) {
       const batchCamelCasedCompany = [
         {
-          companyId: "twitch",
+          companyId: "randomId" + Math.random(),
           ipAddress: "199.2.232.2",
           companyDomain: "twitch.com",
           metadata: {
@@ -44,7 +64,7 @@ if (RUN_TEST) {
           }
         },
         {
-          companyId: "doc",
+          companyId: "randomId" + Math.random(),
           ipAddress: "199.2.232.2",
           companyDomain: "stuff.com",
           metadata: {
@@ -65,15 +85,46 @@ if (RUN_TEST) {
       );
     }); // end of it
 
-    it("update single company", function (done) {
-      const singleCamelCasedCompany = {
-        companyId: "helloThere",
+
+    it("update single user", function (done) {
+      const singleCamelCasedUser = {
+        userId: "userId" + Math.random(),
         ipAddress: "199.2.232.2",
-        companyDomain: "hello.com"
+        companyId: "helloThere"
       };
 
-      middleWare.updateCompany(
-        singleCamelCasedCompany,
+      middleWare.updateUser(
+        singleCamelCasedUser,
+        function (err, success) {
+          if (err) {
+            console.log(err);
+          } else {
+          }
+          done();
+        }
+      );
+    }); // end of it
+
+    it("update user batch", function (done) {
+      const camelCasedUsersArray = [
+        {
+        userId: "userId" + Math.random(),
+        ipAddress: "199.2.232.2",
+        companyId: "helloThere"
+      },
+      {
+        userId: "userId" + Math.random(),
+        ipAddress: "199.2.232.2",
+        companyId: "helloThere",
+        metadata: {
+          "name": 'you',
+          "first_name": "hello"
+        }
+      }
+    ];
+
+      middleWare.updateUsersBatch(
+        camelCasedUsersArray,
         function (err, success) {
           if (err) {
             console.log(err);
