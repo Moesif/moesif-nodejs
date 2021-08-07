@@ -3,7 +3,7 @@ var http = require('http');
 var https = require('https');
 var patch = require('../lib/outgoing');
 
-var RUN_TEST = true;
+var RUN_TEST = false;
 
 if (RUN_TEST) {
   describe('unit test capture outgoing http requests', function() {

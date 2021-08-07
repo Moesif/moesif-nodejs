@@ -5,7 +5,7 @@ var moesifapi = require('moesifapi');
 var patch = require('../lib/outgoing');
 var createOutgoingRecorder = require('../lib/outgoingRecorder');
 
-var RUN_TEST = true;
+var RUN_TEST = false;
 
 if (RUN_TEST) {
   describe('test capture using actual moesif api', function() {

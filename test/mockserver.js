@@ -14,7 +14,7 @@ var moesif = require('../lib');
 
 // replace with an moesif application id token to test..
 var TEST_API_SECRET_KEY = 'Your Moesif Application Id';
-var RUN_TEST = true;
+var RUN_TEST = false;
 
 function mockReq(reqMock) {
   var reqSpec = extend(
