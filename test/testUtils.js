@@ -4,11 +4,11 @@ var https = require('https');
 var dataUtils = require('../lib/dataUtils');
 var assert = require('assert');
 
-var RUN_TEST = false;
+var RUN_TEST = true;
 
 if (RUN_TEST) {
-  describe('test hashSensitive', function() {
-    it('test simple hash with passwords', function(done) {
+  describe('test hashSensitive', function () {
+    it('test simple hash with passwords', function (done) {
       const testData = {
         blah: '123421',
         stuff: [
@@ -32,5 +32,12 @@ if (RUN_TEST) {
       done();
     }); // end of test simp
 
+    it('test computeBodySize', function () {
+      const body = {
+        random: '22505296759'
+      };
+
+      console.log('size of json: ' + dataUtils.computeBodySize(body));
+    });
   }); // end of describe
 }

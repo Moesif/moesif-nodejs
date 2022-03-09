@@ -6,7 +6,7 @@ var moesif = require("../lib/index");
 
 var CompanyModel = moesifapi.CompanyModel;
 
-var RUN_TEST = true;
+var RUN_TEST = false;
 
 if (RUN_TEST) {
   describe("unit tests for updating companies or users", function () {
