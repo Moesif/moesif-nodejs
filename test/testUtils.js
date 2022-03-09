@@ -1,25 +1,25 @@
-'use strict';
-var http = require('http');
-var https = require('https');
-var dataUtils = require('../lib/dataUtils');
-var assert = require('assert');
+"use strict";
+var http = require("http");
+var https = require("https");
+var dataUtils = require("../lib/dataUtils");
+var assert = require("assert");
 
-var RUN_TEST = false;
+var RUN_TEST = true;
 
 if (RUN_TEST) {
-  describe('test hashSensitive', function() {
-    it('test simple hash with passwords', function(done) {
+  describe("test hashSensitive", function () {
+    it("test simple hash with passwords", function (done) {
       const testData = {
-        blah: '123421',
+        blah: "123421",
         stuff: [
           {
-            password1: '12342DIOSDLDS'
+            password1: "12342DIOSDLDS"
           },
           {
-            password2: 'Adsfdsadf23432431234123A'
+            password2: "Adsfdsadf23432431234123A"
           }
         ],
-        pass: '12341241'
+        pass: "12341241"
       };
 
       const hashedValue = dataUtils.hashSensitive(testData);
@@ -32,5 +32,12 @@ if (RUN_TEST) {
       done();
     }); // end of test simp
 
+    it("test computeBodySize", function () {
+      const body = {
+        random: "22505296759"
+      };
+
+      console.log('size of json: ' + dataUtils.computeBodySize(body));
+    });
   }); // end of describe
 }
