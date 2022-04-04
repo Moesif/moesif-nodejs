@@ -563,6 +563,7 @@ As an example, many Koa auth middleware save the authenticated user on `ctx.stat
 - [View example app with Koa](https://github.com/Moesif/moesif-koa-example).
 - [View example app with Apollo.js GraphQL.](https://github.com/Moesif/moesif-apollo-graphql-example)
 - [View example app with Express GraphQL.](https://github.com/Moesif/moesif-express-graphql-example)
+- [View example app with Next.js](https://github.com/Moesif/moesif-next-js-example)
 
 ## Other integrations
 
