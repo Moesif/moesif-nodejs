@@ -277,6 +277,22 @@ options.maskContent = function(event) {
 }
 
 ```
+An example to omit certain variables from being sent to Moesif
+
+``` javascript
+import _ from 'lodash';
+
+var options = {
+
+  applicationId: 'Your Moesif Application Id',
+
+  maskContent: function(event) {
+    // remove any field that you don't want to be sent to Moesif.
+    const newEvent = _.omit(event, ['request.headers.Authorization', 'event.response.body.sensitive_field'])
+    return newEvent;
+  }
+};
+````
 
 #### __`debug`__
 Type: `Boolean`
