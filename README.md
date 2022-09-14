@@ -77,7 +77,7 @@ Your Moesif Application Id can be found in the [_Moesif Portal_](https://www.moe
 After signing up for a Moesif account, your Moesif Application Id will be displayed during the onboarding steps.
 
 You can always find your Moesif Application Id at any time by logging
-into the [_Moesif Portal_](https://www.moesif.com/), click on the top right menu,
+into the [_Moesif Portal_](https://www.moesif.com/), click on the bottom left menu,
  and then clicking _Installation_.
 
 ```javascript
@@ -125,9 +125,11 @@ so you can understand who calling your API. This can be used simultaneously with
 to track both individual customers and the companies with which they're associated.
 
 ```javascript
-options.identifyUser = function (req, res) {
-  // your code here, must return a string
-  return req.user.id
+var options = {
+  identifyUser: function (req, res) {
+    // your code here must return the user id as a string. Example Below
+    return req.user ? req.user.id : undefined;
+  }
 }
 ```
 
@@ -141,9 +143,11 @@ calling your API. This can be used simultaneously with `identifyUser` to track b
 individual customers and the companies with which they're associated.
 
 ```javascript
-options.identifyCompany = function (req, res) {
-  // your code here, must return a string
-  return req.headers['X-Organization-Id']
+var options = {
+  identifyCompany: function (req, res) {
+    // your code here must return the company id as a string. Example Below
+    return req.headers['X-Organization-Id']
+  }
 }
 ```
 
@@ -152,11 +156,12 @@ options.identifyCompany = function (req, res) {
 Type: `(Request, Response) => String`
 getSessionToken a function that takes express `req` and `res` arguments and returns a session token (i.e. such as an API key).
 
-
 ```javascript
-options.getSessionToken = function (req, res) {
-  // your code here, must return a string.
-  return req.headers['Authorization'];
+var options = {
+  getSessionToken: function (req, res) {
+    // your code here must return a string. Example Below
+    return req.headers['Authorization'];
+  }
 }
 ```
 
@@ -165,11 +170,12 @@ options.getSessionToken = function (req, res) {
 Type: `(Request, Response) => String`
 getApiVersion is a function that takes a express `req` and `res` arguments and returns a string to tag requests with a specific version of your API.
 
-
 ```javascript
-options.getApiVersion = function (req, res) {
-  // your code here. must return a string.
-  return '1.0.5'
+var options = {
+  getApiVersion: function (req, res) {
+    // your code here must return a string. Example Below
+    return req.headers['X-Api-Version']
+  }
 }
 ```
 
@@ -179,14 +185,15 @@ Type: `(Request, Response) => Object`
 getMetadata is a function that takes a express `req` and `res` and returns an object that allows you
 to add custom metadata that will be associated with the req. The metadata must be a simple javascript object that can be converted to JSON. For example, you may want to save a VM instance_id, a trace_id, or a tenant_id with the request.
 
-
 ```javascript
-options.getMetadata = function (req, res) {
-  // your code here:
-  return {
-    foo: 'custom data',
-    bar: 'another custom data'
-  };
+var options = {
+  getMetadata: function (req, res) {
+    // your code here:
+    return {
+      foo: 'custom data',
+      bar: 'another custom data'
+    };
+  }
 }
 ```
 
@@ -196,15 +203,16 @@ Type: `(Request, Response) => Boolean`
 skip is a function that takes a express `req` and `res` arguments and returns true if the event should be skipped (i.e. not logged)
 <br/>_The default is shown below and skips requests to the root path "/"._
 
-
 ```javascript
-options.skip = function (req, res) {
-  // your code here. must return a boolean.
-  if (req.path === '/') {
-    // Skip probes to home page.
-    return true;
+var options = {
+  skip: function (req, res) {
+    // your code here must return a boolean. Example Below
+    if (req.path === '/' || req.path === '/health') {
+      // Skip logging traffic to root path or health probe.
+      return true;
+    }
+    return false
   }
-  return false
 }
 ```
 
@@ -214,12 +222,16 @@ Type: `MoesifEventModel => MoesifEventModel`
 maskContent is a function that takes the final Moesif event model (rather than the Express req/res objects) as an argument before being sent to Moesif.
 With maskContent, you can make modifications to headers or body such as removing certain header or body fields.
 
-
 ```javascript
-options.maskContent = function(event) {
-  // remove any field that you don't want to be sent to Moesif.
-  return event;
-}
+import _ from 'lodash';
+
+var options = {
+  maskContent: function(event) {
+    // remove any field that you don't want to be sent to Moesif.
+    const newEvent = _.omit(event, ['request.headers.Authorization', 'event.response.body.sensitive_field'])
+    return newEvent;
+  }
+};
  ```
 
 `EventModel` format:
@@ -227,7 +239,7 @@ options.maskContent = function(event) {
 ```json
 {
   "request": {
-    "time": "2019-08-08T04:45:42.914",
+    "time": "2022-08-08T04:45:42.914",
     "uri": "https://api.acmeinc.com/items/83738/reviews/",
     "verb": "POST",
     "api_version": "1.1.0",
@@ -256,7 +268,7 @@ options.maskContent = function(event) {
     }
   },
   "response": {
-    "time": "2019-08-08T04:45:42.924",
+    "time": "2022-08-08T04:45:42.924",
     "status": 500,
     "headers": {
       "Vary": "Accept-Encoding",
@@ -275,23 +287,6 @@ options.maskContent = function(event) {
   "session_token":"end_user_session_token",
   "tags": "tag1, tag2"
 }
-
-```
-An example to omit certain variables from being sent to Moesif
-
-``` javascript
-import _ from 'lodash';
-
-var options = {
-
-  applicationId: 'Your Moesif Application Id',
-
-  maskContent: function(event) {
-    // remove any field that you don't want to be sent to Moesif.
-    const newEvent = _.omit(event, ['request.headers.Authorization', 'event.response.body.sensitive_field'])
-    return newEvent;
-  }
-};
 ````
 
 #### __`debug`__
@@ -414,13 +409,6 @@ var moesifMiddleware = moesif(options);
 var user = {
   userId: '12345',
   companyId: '67890', // If set, associate user with a company object
-  campaign: {
-    utmSource: 'google',
-    utmMedium: 'cpc',
-    utmCampaign: 'adwords',
-    utmTerm: 'api+tooling',
-    utmContent: 'landing'
-  },
   metadata: {
     email: 'john@acmeinc.com',
     firstName: 'John',
@@ -453,13 +441,6 @@ var moesifMiddleware = moesif(options);
 var user = {
   userId: '12345',
   companyId: '67890', // If set, associate user with a company object
-  campaign: {
-    utmSource: 'google',
-    utmMedium: 'cpc',
-    utmCampaign: 'adwords',
-    utmTerm: 'api+tooling',
-    utmContent: 'landing'
-  },
   metadata: {
     email: 'john@acmeinc.com',
     firstName: 'John',
@@ -497,13 +478,6 @@ var moesifMiddleware = moesif(options);
 var company = {
   companyId: '67890',
   companyDomain: 'acmeinc.com', // If domain is set, Moesif will enrich your profiles with publicly available info
-  campaign: {
-    utmSource: 'google',
-    utmMedium: 'cpc',
-    utmCampaign: 'adwords',
-    utmTerm: 'api+tooling',
-    utmContent: 'landing'
-  },
   metadata: {
     orgName: 'Acme, Inc',
     planName: 'Free Plan',
@@ -535,13 +509,6 @@ var moesifMiddleware = moesif(options);
 var company = {
   companyId: '67890',
   companyDomain: 'acmeinc.com', // If domain is set, Moesif will enrich your profiles with publicly available info
-  campaign: {
-    utmSource: 'google',
-    utmMedium: 'cpc',
-    utmCampaign: 'adwords',
-    utmTerm: 'api+tooling',
-    utmContent: 'landing'
-  },
   metadata: {
     orgName: 'Acme, Inc',
     planName: 'Free Plan',
