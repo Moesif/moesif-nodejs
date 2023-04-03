@@ -1,8 +1,9 @@
 {
   "name": "moesif-nodejs",
-  "version": "3.3.2",
+  "version": "3.3.3",
   "description": "Monitoring agent to log API calls to Moesif for deep API analytics",
   "main": "lib/index.js",
+  "typings": "dist/index.d.ts",
   "keywords": [
     "moesif",
     "api",
@@ -43,6 +44,7 @@
     "uuid4": "^2.0.2"
   },
   "devDependencies": {
+    "@types/node": "^18.15.11",
     "assert": "^2.0.0",
     "blanket": "^1.2.3",
     "chai": "^4.3.4",
@@ -54,9 +56,11 @@
     "request": "^2.88.2",
     "should": "^13.2.3",
     "travis-cov": "^0.2.5",
+    "typescript": "^5.0.3",
     "util": "^0.12.4"
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha --reporter spec"
+    "test": "node_modules/.bin/mocha --reporter spec",
+    "build:types": "npx tsc"
   }
 }
