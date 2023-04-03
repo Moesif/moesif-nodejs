@@ -60,6 +60,7 @@
     "util": "^0.12.4"
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha --reporter spec"
+    "test": "node_modules/.bin/mocha --reporter spec",
+    "build:types": "npx tsc"
   }
 }
