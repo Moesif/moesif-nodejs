@@ -67,9 +67,7 @@ if (RUN_TEST) {
         function(eventData) {
           return eventData;
         };
-      options.ignoreRoute = function() {
-        return false;
-      };
+
       options.skip =
         options.skip ||
         function(req, res) {
