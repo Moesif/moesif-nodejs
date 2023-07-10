@@ -1,6 +1,6 @@
 {
   "name": "moesif-nodejs",
-  "version": "3.4.1",
+  "version": "3.4.2",
   "description": "Monitoring agent to log API calls to Moesif for deep API analytics",
   "main": "lib/index.js",
   "typings": "dist/index.d.ts",
@@ -38,7 +38,7 @@
     "iconv-lite": "^0.6.3",
     "koa-body": "^4.2.0",
     "lodash": "^4.17.19",
-    "moesifapi": "^2.1.1",
+    "moesifapi": "^2.1.2",
     "raw-body": "^2.4.2",
     "request-ip": "^3.3.0",
     "uuid4": "^2.0.2"
