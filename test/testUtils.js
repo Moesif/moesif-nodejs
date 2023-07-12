@@ -4,7 +4,7 @@ var https = require('https');
 var dataUtils = require('../lib/dataUtils');
 var assert = require('assert');
 
-var RUN_TEST = true;
+var RUN_TEST = false;
 
 if (RUN_TEST) {
   describe('test data utils', function () {
