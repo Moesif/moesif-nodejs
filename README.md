@@ -341,7 +341,7 @@ Default 'false'. By default, Moesif Express batches the Events. Turn this to tru
 #### __`batchSize`__
 
 Type: number
-Default 25. If batching is not disabled, this is the batchSize of API events that will trigger flushing of queue and sending the data to Moesif. If set, must be greater than 1.
+Default 200. If batching is not disabled, this is the batchSize of API events that will trigger flushing of queue and sending the data to Moesif. If set, must be greater than 1.
 
 #### __`batchMaxTime`__
 
