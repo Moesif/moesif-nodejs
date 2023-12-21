@@ -47,7 +47,7 @@
     "@types/node": "^18.15.11",
     "assert": "^2.0.0",
     "blanket": "^1.2.3",
-    "chai": "^4.3.4",
+    "chai": "^4.3.10",
     "express": "^4.17.2",
     "express-unless": "^1.0.0",
     "mocha": "^9.2.1",
