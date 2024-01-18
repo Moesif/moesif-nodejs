@@ -6,14 +6,14 @@ var moesif = require("../lib/index");
 
 var CompanyModel = moesifapi.CompanyModel;
 
-var RUN_TEST = false;
+var RUN_TEST = true;
 
 if (RUN_TEST) {
   describe("unit tests for updating companies or users", function () {
     this.timeout(10000);
 
     var middleWare = moesif({
-      applicationId: "test id",
+      applicationId: "Your Moesif Application ID",
       debug: true
       // debug: 'instrumentation',
     });
@@ -143,6 +143,8 @@ if (RUN_TEST) {
       return middleWare.updateUser(singleCamelCasedUser);
     }); // end of it
 
+
+
     it("update user batch", function (done) {
       const camelCasedUsersArray = [
         {
@@ -193,5 +195,51 @@ if (RUN_TEST) {
 
       return middleWare.updateUsersBatch(camelCasedUsersArray);
     }); // end of it
+
+
+    it("update single subscription promise", function () {
+      var date = new Date();
+      const singleCamelCasedSubscription = {
+        subscriptionId: "subscriptionId" + Math.random(),
+        companyId: 'random' + Math.random(),
+        currentPeriodStart: new Date(date.setMonth(date.getMonth() - 2)).toISOString(),
+        currentPeriodEnd: new Date(date.setMonth(date.getMonth() + 2)).toISOString(),
+        status: 'active',
+        metadata: {
+          random: 'abc'
+        }
+      };
+
+      return middleWare.updateSubscription(singleCamelCasedSubscription);
+    }); //
+
+    it("update batch subscription promise", function () {
+      var date = new Date();
+      const batchCamelCasedSubscriptions = [
+        {
+          subscriptionId: 'subscriptionId' + Math.random(),
+          companyId: 'random' + Math.random(),
+          currentPeriodStart: new Date(date.setMonth(date.getMonth() - 2)).toISOString(),
+          currentPeriodEnd: new Date(date.setMonth(date.getMonth() + 2)).toISOString(),
+          status: 'active',
+          metadata: {
+            random: 'abc',
+          },
+        },
+        {
+          subscriptionId: 'subscriptionId' + Math.random(),
+          companyId: 'random' + Math.random(),
+          currentPeriodStart: new Date(date.setMonth(date.getMonth() - 3)).toISOString(),
+          currentPeriodEnd: new Date(date.setMonth(date.getMonth() + 4)).toISOString(),
+          status: 'active',
+          metadata: {
+            random: 'abc2',
+          },
+        },
+      ];
+
+      return middleWare.updateSubscriptionsBatch(batchCamelCasedSubscriptions);
+    }); // end of it
+
   }); // end of describe
 } // end of if(RUN_TEST)

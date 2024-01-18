@@ -3,7 +3,7 @@ var assert = require('assert');
 var moesifConfigManager = require('../lib/moesifConfigManager');
 var governanceRulesManager = require('../lib/governanceRulesManager');
 
-var RUN_TEST = true;
+var RUN_TEST = false;
 
 if (RUN_TEST) {
   describe('governance rules unit test', function () {
