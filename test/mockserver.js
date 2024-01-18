@@ -385,6 +385,79 @@ if (RUN_TEST) {
           }
         );
       });
+
+      it('should be able to update subscription in Moesif.', function(done) {
+        var moesifMiddleware = moesif({ applicationId: TEST_API_SECRET_KEY });
+      
+        moesifMiddleware.updateSubscription({
+          subscription_id: '12345',
+          company_id: '67890',
+          current_period_start: '2024-01-21T17:32:28.000Z',
+          current_period_end: '2024-11-21T17:32:28.000Z',
+          status: 'active',
+          metadata: {
+            subscription_type: 'PAYG',
+            subscription_tier: 'Pro',
+            quota: {
+              quota_limit: 1000000,
+              quota_period: 'Year'
+            }
+          }
+        },
+          function(error, response, context) {
+            expect(context.response.statusCode).to.equal(201);
+            if (error) done(error);
+            else done();
+          }
+        );
+      });
+
+      it('should be able to update subscriptions in batch to Moesif.', function(done) {
+        var moesifMiddleware = moesif({ applicationId: TEST_API_SECRET_KEY });
+      
+        var subscriptions = [];
+      
+        subscriptions.push({
+          subscription_id: '12345',
+          company_id: '67890',
+          current_period_start: '2024-01-21T17:32:28.000Z',
+          current_period_end: '2024-11-21T17:32:28.000Z',
+          status: 'active',
+          metadata: {
+            subscription_type: 'PAYG',
+            subscription_tier: 'Pro',
+            quota: {
+              quota_limit: 1000000,
+              quota_period: 'Year'
+            }
+          }
+        });
+      
+        subscriptions.push({
+          subscription_id: 'abcde',
+          company_id: 'xyz12',
+          current_period_start: '2024-02-11T10:15:30.000Z',
+          current_period_end: '2024-12-11T10:15:30.000Z',
+          status: 'pending',
+          metadata: {
+            subscription_type: 'Fixed',
+            subscription_tier: 'Enterprise',
+            quota: {
+              quota_limit: 2000000,
+              quota_period: 'Year'
+            }
+          }
+        });
+      
+        moesifMiddleware.updateSubscriptionsBatch(subscriptions,
+          function(error, response, context) {
+            expect(context.response.statusCode).to.equal(201);
+            if (error) done(error);
+            else done();
+          }
+        );
+      });      
+      
     });
   });
 }

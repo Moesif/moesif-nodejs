@@ -193,5 +193,107 @@ if (RUN_TEST) {
 
       return middleWare.updateUsersBatch(camelCasedUsersArray);
     }); // end of it
+
+    it("update single subscription", function (done) {
+      const singleSubscription = {
+        subscription_id: "sub_" + Math.random(),
+        company_id: "cus_" + Math.random(),
+        current_period_start: "2024-01-01T00:00:00.000Z",
+        current_period_end: "2024-12-31T23:59:59.000Z",
+        status: "active",
+        metadata: {
+          subscription_type: "Basic"
+        }
+      };
+    
+      middleWare.updateSubscription(
+        singleSubscription,
+        function (err) {
+          if (err) {
+            console.log(err);
+          }
+          done();
+        }
+      );
+    });
+
+    it("update single subscription promise", function () {
+      const singleSubscription = {
+        subscription_id: "sub_" + Math.random(),
+        company_id: "cus_" + Math.random(),
+        current_period_start: "2024-01-01T00:00:00.000Z",
+        current_period_end: "2024-12-31T23:59:59.000Z",
+        status: "active",
+        metadata: {
+          subscription_type: "Basic"
+        }
+      };
+    
+      return middleWare.updateSubscription(singleSubscription);
+    }); // end of it
+    
+    it("update subscription batch", function (done) {
+      const batchSubscriptions = [
+        {
+          subscription_id: "sub_" + Math.random(),
+          company_id: "comp_" + Math.random(),
+          current_period_start: "2024-01-01T00:00:00.000Z",
+          current_period_end: "2024-12-31T23:59:59.000Z",
+          status: "active",
+          metadata: {
+            subscription_type: "Premium"
+          }
+        },
+        {
+          subscription_id: "sub_" + Math.random(),
+          company_id: "cus_" + Math.random(),
+          current_period_start: "2024-01-01T00:00:00.000Z",
+          current_period_end: "2024-12-31T23:59:59.000Z",
+          status: "pending",
+          metadata: {
+            subscription_type: "Standard"
+          }
+        }
+      ];
+    
+      middleWare.updateSubscriptionsBatch(
+        batchSubscriptions,
+        function (err) {
+          if (err) {
+            console.log(err);
+          }
+          done();
+        }
+      );
+    }); // end of it
+
+    it("update subscription batch promise", function () {
+      const batchSubscriptions = [
+        {
+          subscription_id: "sub_" + Math.random(),
+          company_id: "cus_" + Math.random(),
+          current_period_start: "2024-01-01T00:00:00.000Z",
+          current_period_end: "2024-12-31T23:59:59.000Z",
+          status: "active",
+          metadata: {
+            subscription_type: "Premium"
+          }
+        },
+        {
+          subscription_id: "sub_" + Math.random(),
+          company_id: "comp_" + Math.random(),
+          current_period_start: "2024-01-01T00:00:00.000Z",
+          current_period_end: "2024-12-31T23:59:59.000Z",
+          status: "pending",
+          metadata: {
+            subscription_type: "Standard"
+          }
+        }
+      ];
+    
+      return middleWare.updateSubscriptionsBatch(batchSubscriptions);
+    }); // end of it
+    
+    
   }); // end of describe
 } // end of if(RUN_TEST)
