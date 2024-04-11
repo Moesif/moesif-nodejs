@@ -1,6 +1,6 @@
 {
   "name": "moesif-nodejs",
-  "version": "3.6.1",
+  "version": "3.6.2",
   "description": "Monitoring agent to log API calls to Moesif for deep API analytics",
   "main": "lib/index.js",
   "typings": "dist/index.d.ts",
@@ -48,7 +48,7 @@
     "assert": "^2.0.0",
     "blanket": "^1.2.3",
     "chai": "^4.3.10",
-    "express": "^4.17.2",
+    "express": "^4.19.2",
     "express-unless": "^1.0.0",
     "mocha": "^9.2.1",
     "node-mocks-http": "^1.11.0",
