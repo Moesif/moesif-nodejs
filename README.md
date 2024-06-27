@@ -554,6 +554,33 @@ As an example, many Koa auth middleware save the authenticated user on `ctx.stat
 - [View example app with Next.js](https://github.com/Moesif/moesif-next-js-example)
 - [View example app with Fastify](https://github.com/Moesif/fastify-moesif-nodejs-example)
 
+## Trouble shooting capturing outgoing APIs:
+
+For instrumenting/capturing outgoing api calls, it instruments standard HTTP or HTTPs from node core,
+however, some third party SDKS may use customized http clients to make API calls thus interferes with instrumentation. Few things to try:
+
+  - Some SDKS, like the Stripe node SDK, even though they have a very customized http client, it let you swap out to a more standard http client like `node-fetch`.
+
+```javascript
+import fetch from 'node-fetch'; // you may have to add by `npm install node-fetch` or yarn equivalent.
+import Stripe from 'stripe';
+
+const stripeClient = Stripe('your secret key', {
+  // basically you are using node fetch as the httpClient.
+  httpClient: Stripe.createFetchHttpClient(fetch),
+});
+```
+
+  - Turn `outgoingPatch` flag to `true` in options to make an attempt to cover non standard http client usage, but it may not cover all cases.
+
+```javascript
+{
+const moesifOptions = {
+  // ... other options,
+  outgoingPatch: true
+};
+```
+
 ## Other integrations
 
 To view more documentation on integration options, please visit __[the Integration Options Documentation](https://www.moesif.com/docs/getting-started/integration-options/).__
