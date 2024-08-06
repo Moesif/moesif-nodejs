@@ -38,7 +38,7 @@
     "iconv-lite": "^0.6.3",
     "koa-body": "^4.2.0",
     "lodash": "^4.17.19",
-    "moesifapi": "^2.1.6",
+    "moesifapi": ">=2.1.7",
     "raw-body": "^2.4.2",
     "request-ip": "^3.3.0",
     "uuid4": "^2.0.2"
