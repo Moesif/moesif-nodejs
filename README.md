@@ -41,7 +41,7 @@ After you log into [Moesif Portal](https://www.moesif.com/wrap), you can get you
 3. Copy your Moesif Application ID from the **Collector Application ID** field.
 <img class="lazyload blur-up" src="images/app_id.png" width="700" alt="Accessing the settings menu in Moesif Portal">
 
-## Install the middleware
+## Install the Middleware
 In your project directory, install the middleware as a project dependency:
 
 ```shell
@@ -51,11 +51,11 @@ npm install --save moesif-nodejs
 ## Configure the Middleware
 See the available [configuration options](#configuration-options) to learn how to configure the middleware for your use case.
 
-## How to use
+## How to Use
 
 The following step shows how to import Moesif for an example app using Express.js.
 
-### 1. Import the module
+### 1. Import the Module
 
 ```javascript
 // 1. Import Modules
@@ -141,7 +141,7 @@ server.listen(8080);
 
 Replace *`YOUR_MOESIF_APPLICATION_ID`* with [your Moesif Application ID](#get-your-moesif-application-id).
 
-### 3. Call Your API
+### 3. Call your API
 
 Finally, grab the URL to your API endpoint and make some HTTP requests using a tool like Postman or cURL.
 
@@ -199,7 +199,7 @@ Here are some tips:
 └── tsconfig.json
 ```
 
-## Configuration options
+## Configuration Options
 
 > **Note:** If you're using Koa, you can access the state object through `request.state`.
 
@@ -1019,6 +1019,21 @@ Only a subset of the Node.js request or response fields are available, specifica
   </tr>
 </table>
 
+## Koa Support
+
+Several of the Moesif [configuration options](#configuration-options) take a Node.js request ane response objects as arguments. You can access the Koa state object through `req.state`.
+
+As an example, many Koa auth middleware save the authenticated user on `ctx.state.user`. You can access it through Moesif options like [`identifyUser`](#identifyuser):
+
+```javascript
+  identifyUser: function (req, res) {
+    if (req.state && req.state.user) {
+      return req.state.user.sub;
+    }
+    return undefined;
+  },
+```
+
 ## Examples
 
 - [View example app with Express.js](https://github.com/Moesif/moesif-express-example).
@@ -1164,20 +1179,8 @@ The `metadata` field can contain any company demographic or other information yo
 
 This method is a convenient helper that calls the Moesif API library. For more information, see the function documentation in [Moesif Node.js API reference](https://www.moesif.com/docs/api?javascript--nodejs#update-companies-in-batch).
 
-## Koa Support
-
-Several of the Moesif [configuration options](#configuration-options) take a Node.js request ane response objects as arguments. You can access the Koa state object through `req.state`.
-
-As an example, many Koa auth middleware save the authenticated user on `ctx.state.user`. You can access it through Moesif options like [`identifyUser`](#identifyuser):
-
-```javascript
-  identifyUser: function (req, res) {
-    if (req.state && req.state.user) {
-      return req.state.user.sub;
-    }
-    return undefined;
-  },
-```
+## How to Get Help
+If you face any issues using this middleware, try the [troubheshooting guidelines](#troubleshoot). For further assistance, reach out to our [support team](mailto:support@moesif.com).
 
 ## Explore Other Integrations
 
