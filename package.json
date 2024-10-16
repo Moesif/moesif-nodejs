@@ -1,6 +1,6 @@
 {
   "name": "moesif-nodejs",
-  "version": "3.7.1",
+  "version": "3.8.1",
   "description": "Monitoring agent to log API calls to Moesif for deep API analytics",
   "main": "lib/index.js",
   "typings": "dist/index.d.ts",

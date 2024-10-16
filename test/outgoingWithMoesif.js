@@ -91,7 +91,7 @@ if (RUN_TEST) {
         });
       };
 
-      var recorder = createOutGoingRecorder(trySaveEventLocal, options, logger);
+      var recorder = createOutgoingRecorder(trySaveEventLocal, options, logger);
 
       var unpatch = patch(recorder, logger);
       console.log('patched successfully, return value of patch is');
