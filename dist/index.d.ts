@@ -14,13 +14,13 @@ export = makeMoesifMiddleware;
  * @property {boolean} [noAutoHideSensitive]
  * @property {(error: object) => any} [callback]
  * @property {boolean} [disableBatching]
- * @property {number} [batchSize] - default 25
+ * @property {number} [batchSize] - default 200
  * @property {number} [batchMaxTime] - default 2000
  * @property {string} [baseUri] - switch to another collector endpoint when using proxy
  * @property {number} [retry] - must be between 0 to 3 if provided.
  * @property {number} [requestMaxBodySize] - default 100000
  * @property {number} [responseMaxBodySize] - default 100000
- *  @property {number} [maxOutgoingTimeout] - default 30000
+ * @property {number} [maxOutgoingTimeout] - default 30000
  */
 /**
  *  @param {MoesifOptions} options
@@ -47,6 +47,8 @@ declare function makeMoesifMiddleware(options: MoesifOptions): {
      * @param {function} [cb]
      */
     updateCompaniesBatch(companiesBatchModel: object[], cb?: Function): Promise<any>;
+    updateSubscription(subscriptionModel: any, cb: any): Promise<any>;
+    updateSubscriptionsBatch(subscriptionBatchModel: any, cb: any): Promise<any>;
     startCaptureOutgoing(): void;
 };
 declare namespace makeMoesifMiddleware {
@@ -70,7 +72,7 @@ type MoesifOptions = {
     callback?: (error: object) => any;
     disableBatching?: boolean;
     /**
-     * - default 25
+     * - default 200
      */
     batchSize?: number;
     /**
