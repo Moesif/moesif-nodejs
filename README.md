@@ -8,10 +8,10 @@ by [Moesif](https://moesif.com), the [API analytics](https://www.moesif.com/feat
 [![Software License][ico-license]][link-license]
 [![Source Code][ico-source]][link-source]
 
-Moesif Node.js middleware automatically logs incoming and outgoing API calls 
+Moesif Node.js middleware automatically logs incoming and outgoing API calls
 and sends them to [Moesif](https://www.moesif.com) for API analytics and monitoring.
-This middleware allows you to integrate Moesif's API analytics and 
-API monetization features into your Node.js applications with minimal configuration. 
+This middleware allows you to integrate Moesif's API analytics and
+API monetization features into your Node.js applications with minimal configuration.
 
 > If you're new to Moesif, see [our Getting Started](https://www.moesif.com/docs/) resources to quickly get up and running.
 
@@ -22,7 +22,7 @@ API monetization features into your Node.js applications with minimal configurat
 - To make sure the SDK captures request body, if you use a body parser middleware like `body-parser`, apply Moesif middleware _after_ it.
 
 ## Who This Middleware is For
-The middleware works with REST APIs, [GraphQL APIs](https://www.moesif.com/features/graphql-analytics) 
+The middleware works with REST APIs, [GraphQL APIs](https://www.moesif.com/features/graphql-analytics)
 (such as with [Apollo](https://www.apollographql.com/)), and more.
 
 This SDK supports any Node.js framework including Express, Koa, and Nest.js. See [the examples](#examples) for more information.
@@ -105,7 +105,7 @@ const moesif = moesifImported.default;
 ```
 
 ### 2. Enter Your Moesif Application ID
-The middleware expects your Moesif Application ID in [the `applicationId` key of the Moesif initialization options object](https://github.com/Moesif/moesif-express-example/blob/a1d94eac8be14a6e52d7d6303d331eae12fc6e99/index.js#L15). 
+The middleware expects your Moesif Application ID in [the `applicationId` key of the Moesif initialization options object](https://github.com/Moesif/moesif-express-example/blob/a1d94eac8be14a6e52d7d6303d331eae12fc6e99/index.js#L15).
 
 For instructions on how to obtain your Application ID, see [Get your Moesif Application ID](#get-your-moesif-application-id).
 
@@ -146,7 +146,7 @@ Replace *`YOUR_MOESIF_APPLICATION_ID`* with [your Moesif Application ID](#get-yo
 Finally, grab the URL to your API endpoint and make some HTTP requests using a tool like Postman or cURL.
 
 ## Troubleshoot
-For a general troubleshooting guide that can help you solve common problems, see [Server Troubleshooting Guide](https://www.moesif.com/docs/troubleshooting/server-troubleshooting-guide/). For troubleshooting issues with capturing outgoing API calls, see [Troubleshoot Capturing Outgoing API Calls](#troubleshoot-outgoing-api-calls-capturing) 
+For a general troubleshooting guide that can help you solve common problems, see [Server Troubleshooting Guide](https://www.moesif.com/docs/troubleshooting/server-troubleshooting-guide/). For troubleshooting issues with capturing outgoing API calls, see [Troubleshoot Capturing Outgoing API Calls](#troubleshoot-outgoing-api-calls-capturing)
 
 Other troubleshooting supports:
 
@@ -155,7 +155,7 @@ Other troubleshooting supports:
 
 ### Troubleshoot Capturing Outgoing API Calls
 
-For instrumenting or capturing outgoing API calls, it instruments standard HTTP or HTTPs from Node.js core. 
+For instrumenting or capturing outgoing API calls, it instruments standard HTTP or HTTPs from Node.js core.
 However, some third party SDKS may use customized HTTP clients to make API calls, which may interfere with instrumentation.
 
 Here are some tips:
@@ -412,10 +412,10 @@ var options = {
   </tr>
 </table>
 
-A function that takes Express.js [`Request`](https://expressjs.com/en/api.html#req) and [`Response`](https://expressjs.com/en/api.html#res) objects as arguments and returns an object. 
+A function that takes Express.js [`Request`](https://expressjs.com/en/api.html#req) and [`Response`](https://expressjs.com/en/api.html#res) objects as arguments and returns an object.
 
 This function allows you
-to add custom metadata that Moesif can associate with the request. The metadata must be a simple JavaScript object that can be converted to JSON. 
+to add custom metadata that Moesif can associate with the request. The metadata must be a simple JavaScript object that can be converted to JSON.
 
 For example, you may want to save a virtual machine instance ID, a trace ID, or a tenant ID with the request.
 
@@ -503,7 +503,7 @@ var options = {
 </table>
 
 A function that takes the final Moesif event model, rather than the Express request or response objects, as an
-argument before the middleware sends the event model object to Moesif. 
+argument before the middleware sends the event model object to Moesif.
 
 With `maskContent`, you can make modifications to headers or body such as
 removing certain header or body fields.
@@ -626,6 +626,29 @@ Name | Required | Description
 Set to `true` to print debug logs if you're having integration issues.
 
 
+### `isNextJsAppRouter`
+
+<table>
+  <tr>
+   <th scope="col">
+    Data type
+   </th>
+   <th scope="col">
+    Default
+   </th>
+  </tr>
+  <tr>
+   <td>
+    <code>Boolean</code>
+   </td>
+   <td>
+    <code>undefined</code>
+   </td>
+  </tr>
+</table>
+
+Set to `true` to adapt the interface for NextJs App Router handlers
+
 ### `noAutoHideSensitive`
 <table>
   <tr>
@@ -647,7 +670,7 @@ Set to `true` to print debug logs if you're having integration issues.
 </table>
 
 Before sending any data for analysis, automatically checks the data (headers and body) and one way
-hash strings or numbers that look like a credit card numbers or passwords. Set 
+hash strings or numbers that look like a credit card numbers or passwords. Set
 to `true` if you want to implement your specific [`maskContent`](#maskcontent) function or you want to send all data to be analyzed.
 
 ### `callback`
@@ -743,8 +766,8 @@ If batching is enabled, this defines the batch size of API events that triggers 
   </tr>
 </table>
 
-If batching is enabled, this defines the maximum wait time (approximately) in 
-milliseconds before triggering flushing of the queue and sending to Moesif. The 
+If batching is enabled, this defines the maximum wait time (approximately) in
+milliseconds before triggering flushing of the queue and sending to Moesif. The
 value must be greater than `500` milliseconds.
 
 ### `retry`

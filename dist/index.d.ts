@@ -21,6 +21,7 @@ export = makeMoesifMiddleware;
  * @property {number} [requestMaxBodySize] - default 100000
  * @property {number} [responseMaxBodySize] - default 100000
  * @property {number} [maxOutgoingTimeout] - default 30000
+ * @property {boolean} [isNextJsAppRouter] - default false
  */
 /**
  *  @param {MoesifOptions} options
@@ -99,5 +100,9 @@ type MoesifOptions = {
      * - default 30000
      */
     maxOutgoingTimeout?: number;
+    /**
+     * - default false
+     */
+    isNextJsAppRouter?: boolean;
 };
 //# sourceMappingURL=index.d.ts.map
