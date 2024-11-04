@@ -65,8 +65,8 @@ if (RUN_TEST) {
           transactionId: crypto.randomUUID(),
           actionName: 'Clicked Sign Up',
           sessionToken: '23abf0owekfmcn4u3qypxg09w4d8ayrcdx8nu2ng]s98y18cx98q3yhwmnhcfx43f',
-          userId: Math.floor(1000 + Math.random() * 9000).toString(),
-          companyId: Math.floor(1000 + Math.random() * 9000).toString(),
+          userId: crypto.randomInt(1, 1001),
+          companyId: crypto.randomInt(1, 1001),
           metadata: {
             email: 'alex@acmeinc.com',
             button_label: 'Get Started',
@@ -79,8 +79,8 @@ if (RUN_TEST) {
           transactionId: crypto.randomUUID(),
           actionName: 'Viewed pricing',
           sessionToken: '23jdf0owejfmbn4u3qypxg09w4d8ayrxdx8nu2ng]s98y18cx98q3yhwmnhcfx43f',
-          userId: Math.floor(1000 + Math.random() * 9000).toString(),
-          companyId: Math.floor(1000 + Math.random() * 9000).toString(),
+          userId: crypto.randomInt(1, 1001),
+          companyId: crypto.randomInt(1, 1001),
           metadata: {
             email: 'kim@acmeinc.com',
             button_label: 'See pricing',
@@ -97,6 +97,78 @@ if (RUN_TEST) {
         }
         done();
       });
+    });
+
+    it('throws error when sending a single action with invalid request field', async function () {
+      const actionName = "Clicked 'Sign up'";
+      const actionMetadata = {
+        button_label: 'Get Started',
+        sign_up_method: 'Google SSO',
+      };
+      // Request context empty that should throw an error
+      const actionReqContext = {};
+      const actionModel = {
+        actionName: actionName,
+        metadata: actionMetadata,
+        request: actionReqContext,
+      };
+      try {
+        await middleWare.sendAction(actionModel, () => {});
+      } catch (err) {
+        expect(err).to.be.instanceOf(Error);
+        expect(err.message).to.eql(
+          'To send an Action, the request and request.uri fields are required'
+        );
+      }
+    });
+
+    it('throws error when sending a batch of actions with invalid request field', async function () {
+      // Define the actions.
+      var actions = [
+        {
+          transactionId: crypto.randomUUID(),
+          actionName: 'Clicked Sign Up',
+          sessionToken: '23abf0owekfmcn4u3qypxg09w4d8ayrcdx8nu2ng]s98y18cx98q3yhwmnhcfx43f',
+          userId: crypto.randomInt(1, 1001),
+          companyId: crypto.randomInt(1, 1001),
+          metadata: {
+            email: 'alex@acmeinc.com',
+            button_label: 'Get Started',
+            sign_up_method: 'Google SSO',
+          },
+          // Missing requried uri field
+          request: {
+            time: Date.now(),
+            ipAddress: '12.48.120.123',
+          },
+        },
+
+        {
+          transactionId: crypto.randomUUID(),
+          actionName: 'Viewed pricing',
+          sessionToken: '23jdf0owejfmbn4u3qypxg09w4d8ayrxdx8nu2ng]s98y18cx98q3yhwmnhcfx43f',
+          userId: crypto.randomInt(1, 1001),
+          companyId: crypto.randomInt(1, 1001),
+          metadata: {
+            email: 'kim@acmeinc.com',
+            button_label: 'See pricing',
+            sign_up_method: 'Google SSO',
+          },
+          // Missing requried uri field
+          request: {
+            time: Date.now(),
+            ipAddress: '12.48.220.123',
+          },
+        },
+      ];
+      try {
+        await middleWare.sendActionsBatch(actions, () => {});
+      } catch (err) {
+        expect(err).to.be.instanceOf(Error);
+        expect(err.message).to.eql(
+          'To send an Action, the request and request.uri fields are required'
+        );
+      }
     });
   });
 }
