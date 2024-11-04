@@ -1202,6 +1202,107 @@ The `metadata` field can contain any company demographic or other information yo
 
 This method is a convenient helper that calls the Moesif API library. For more information, see the function documentation in [Moesif Node.js API reference](https://www.moesif.com/docs/api?javascript--nodejs#update-companies-in-batch).
 
+### Add a single Action
+
+To track and log single [Action](https://www.moesif.com/docs/getting-started/user-actions/) in Moesif, use the `sendAction()` function.
+
+
+```javascript
+var moesifMiddleware = moesif(options);
+
+// Only `actionName` and `request` is required.
+// `metadata` is an object containing custom metadata about the Action.
+var action = {
+  transactionId: "a3765025-46ec-45dd-bc83-b136c8d1d257",
+  actionName: "Clicked Sign Up",
+  sessionToken: "23jdf0owekfmcn4u3qypxg08w4d8ayrcdx8nu2nz]s98y18cx98q3yhwmnhcfx43f",
+  userId: "12345",
+  companyId: "67890",
+  metadata: {
+    email: "johndoe@acmeinc.com",
+    button_label: 'Get Started',
+    sign_up_method: 'Google SSO'
+  },
+  request: {
+    time: new Date(),
+    uri: "https://api.acmeinc.com/items/reviews/",
+    ipAddress: "61.48.220.123",
+  }
+};
+// Send the Action
+moesifMiddleware.sendAction(action, callback);
+```
+
+The `metadata` field can contain any optional metadata about the Action you want to store. Moesif only requires the `actionName` and `request` fields.
+
+This method is a convenient helper that calls the Moesif API library. For more information, see [Moesif API reference](https://www.moesif.com/docs/api?int_source=docs#track-a-custom-action).
+
+### Add a batch of Actions
+
+To track and log a batch of [Actions](https://www.moesif.com/docs/getting-started/user-actions/) in Moesif, use the `sendActionsBatch()` function.
+
+
+```javascript
+var moesifMiddleware = moesif(options);
+
+// Define the request context objects for each action.
+var req_contextA = {
+  time: new Date(),
+  uri: "https://api.acmeinc.com/items/reviews/",
+  ipAddress: "61.48.220.123",
+  userAgentString: "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0"
+};
+
+var req_contextB = {
+  time: new Date(),
+  uri: "https://api.acmeinc.com/pricing/",
+  ipAddress: "61.48.220.126",
+  userAgentString: "PostmanRuntime/7.26.5"
+};
+
+// Define the actions.
+// Only `actionName` and `request` is required.
+// `metadata` is an object containing custom metadata about the Action.
+var actionA = {
+  transactionId: "a3765025-46ec-45dd-bc83-b136a8d1d357",
+  actionName: "Clicked Sign Up",
+  sessionToken: "23abf0owekfmcn4u3qypxg09w4d8ayrcdx8nu2ng]s98y18cx98q3yhwmnhcfx43f",
+  userId: "18340",
+  companyId: "25100",
+  metadata: {
+    email: "alex@acmeinc.com",
+    button_label: 'Get Started',
+    sign_up_method: 'Google SSO'
+  },
+  request: req_contextA
+};
+
+var actionB = {
+  transactionId: "a3765024-46ee-45dd-bc83-b136c8d1d250",
+  actionName: "Viewed pricing",
+  sessionToken: "23jdf0owejfmbn4u3qypxg09w4d8ayrxdx8nu2ng]s98y18cx98q3yhwmnhcfx43f",
+  userId: "12390",
+  companyId: "97895",
+  metadata: {
+    email: "kim@acmeinc.com",
+    button_label: 'See pricing',
+    sign_up_method: 'Google SSO'
+  },
+  request: req_contextB
+};
+
+var actions = [
+  actionA,
+  actionB
+];
+// Send the batch of Actions
+moesifMiddleware.sendActionsBatch(actions, callback);
+```
+
+The `metadata` field can contain any optional metadata about the Action you want to store. Moesif only requires the `actionName` and `request` fields.
+
+This method is a convenient helper that calls the Moesif API library. For more information, see [Moesif API reference](https://www.moesif.com/docs/api?int_source=docs#track-custom-actions-in-batch).
+
 ## How to Get Help
 If you face any issues using this middleware, try the [troubheshooting guidelines](#troubleshoot). For further assistance, reach out to our [support team](mailto:support@moesif.com).
 
