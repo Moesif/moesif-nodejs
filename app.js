@@ -8,20 +8,21 @@ var app = express();
 
 var moesif = require('./lib');
 
-var TEST_APPLICATION_ID = 'Your Moesif Application ID';
+const APPLICATION_ID = 'YOUR_MOESIF_APPLICATION_ID';
 
-var moesifMiddleWare = moesif({applicationId: TEST_API_SECRET_KEY});
+var moesifMiddleWare = moesif({ applicationId: APPLICATION_ID });
 
 app.use(moesifMiddleWare);
+app.use(express.json());
 
 app.get('/', function (req, res) {
-  res.json({a: 'abc'});
+  res.json({ a: 'abc' });
 });
 
 app.get('/abc', function (req, res) {
-  res.json({abc: 'abcefg'});
+  res.json({ abc: 'abcefg' });
 });
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+const server = app.listen(0, () => {
+  console.log(`Example app listening on port ${server.address().port}`);
 });
