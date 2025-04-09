@@ -1065,6 +1065,7 @@ As an example, many Koa auth middleware save the authenticated user on `ctx.stat
 - [View example app with Express GraphQL.](https://github.com/Moesif/moesif-express-graphql-example)
 - [View example app with Next.js](https://github.com/Moesif/moesif-next-js-example)
 - [View example app with Fastify](https://github.com/Moesif/fastify-moesif-nodejs-example)
+- [View example app with Hapi](https://github.com/Moesif/moesif-nodejs-hapi-example)
 
 The following examples demonstrate how to add and update customer information.
 
