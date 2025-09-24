@@ -3,25 +3,34 @@ const zlib = require('zlib');
 const dataUtils = require('../lib/dataUtils');
 
 describe('decompressIfNeeded', function () {
-  it('should decompress brotli-compressed buffer from Cloudflare', function () {
+  it('should decompress brotli-compressed buffer from Cloudflare with text content-type', function() {
     var original = JSON.stringify({ foo: 'bar', baz: 42 });
     var compressed = zlib.brotliCompressSync(Buffer.from(original));
-    var headers = { server: 'cloudflare' };
+    var headers = { server: 'cloudflare', 'content-type': 'application/json' };
     var result = dataUtils.decompressIfNeeded(compressed, headers);
     assert.strictEqual(result, original);
   });
 
-  it('should decompress gzip-compressed buffer', function () {
+  it('should decompress gzip-compressed buffer with text content-type', function() {
     var original = JSON.stringify({ hello: 'world' });
     var compressed = zlib.gzipSync(Buffer.from(original));
-    var headers = { 'content-encoding': 'gzip' };
+    var headers = { 'content-encoding': 'gzip', 'content-type': 'application/json' };
     var result = dataUtils.decompressIfNeeded(compressed, headers);
     assert.strictEqual(result, original);
   });
 
-  it('should return original string if not compressed', function () {
+  it('should skip decompression for non-text content-type (image/png)', function() {
+    var original = Buffer.from([0x89, 0x50, 0x4E, 0x47]); // PNG header
+    var compressed = zlib.gzipSync(original);
+    var headers = { 'content-encoding': 'gzip', 'content-type': 'image/png' };
+    var result = dataUtils.decompressIfNeeded(compressed, headers);
+    // Should return the original compressed buffer, not decompressed
+    assert.deepStrictEqual(result, compressed);
+  });
+
+  it('should return original string if not compressed and text content-type', function() {
     var original = 'plain text';
-    var headers = {};
+    var headers = { 'content-type': 'text/plain' };
     var result = dataUtils.decompressIfNeeded(original, headers);
     assert.strictEqual(result, original);
   });
